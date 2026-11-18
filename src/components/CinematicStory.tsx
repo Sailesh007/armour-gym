@@ -10,7 +10,7 @@ import { ParallaxFrame, Reveal } from "@/components/Parallax";
 const moments = [
   {
     number: "01",
-    label: "THE SPACE",
+    label: "The space",
     title: "Built to move differently.",
     description:
       "A purposeful training environment with room to focus, push and progress at your own pace.",
@@ -19,7 +19,7 @@ const moments = [
   },
   {
     number: "02",
-    label: "THE EQUIPMENT",
+    label: "The equipment",
     title: "Every rep matters.",
     description:
       "From free weights to dedicated strength stations, find your next challenge on the gym floor.",
@@ -28,7 +28,7 @@ const moments = [
   },
   {
     number: "03",
-    label: "YOUR ROUTINE",
+    label: "Your routine",
     title: "Your goals. Your hours.",
     description:
       "Make training part of your life with the flexibility and energy of ARMOUR 24-7.",
@@ -68,10 +68,6 @@ export default function CinematicStory() {
       <div className="relative mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20 lg:px-8">
         <div className="self-start lg:sticky lg:top-32">
           <Reveal>
-            <p className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.28em] text-[#E33B42]">
-              <span className="h-px w-10 bg-[#C8010A]" />
-              A DIFFERENT STANDARD
-            </p>
             <h2
               id="story-heading"
               className="max-w-xl font-oswald text-[clamp(3.25rem,5.8vw,6.6rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em] text-white"
@@ -82,14 +78,14 @@ export default function CinematicStory() {
               <br />
               IT&apos;S A
               <br />
-              <span className="text-[#C8010A]">MOVEMENT.</span>
+              MOVEMENT.
             </h2>
             <p className="mt-8 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
               A place to show up, find your strength and keep moving forward — together.
             </p>
             <Link
               href="/#gallery"
-              className="group mt-9 inline-flex items-center gap-3 border-b border-[#C8010A] pb-3 font-oswald text-sm font-bold uppercase tracking-[0.13em] text-white transition-colors hover:text-[#F15A60]"
+              className="group mt-9 inline-flex items-center gap-3 border-b border-[#C8010A] pb-2 font-body text-sm font-semibold text-white transition-colors hover:text-[#FF858A]"
             >
               Explore our space
               <ArrowUpRight aria-hidden="true" className="size-4 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -103,8 +99,8 @@ export default function CinematicStory() {
                 style={{ scaleY: reduceMotion ? 1 : progress }}
               />
             </div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">
-              SCROLL TO EXPLORE
+            <span className="font-body text-xs text-white/65">
+              Scroll to explore
             </span>
           </div>
         </div>
@@ -118,10 +114,7 @@ export default function CinematicStory() {
                   className="relative h-[20rem] overflow-hidden sm:h-[30rem] lg:h-[34rem]"
                   overlay={
                     <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-gradient-to-t from-black/65 via-transparent to-black/30 p-6 sm:p-8">
-                      <span className="font-oswald text-6xl font-bold leading-none text-white/35 sm:text-8xl">
-                        {moment.number}
-                      </span>
-                      <span className="border border-white/35 bg-black/30 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
+                      <span className="border border-white/40 bg-black/40 px-3 py-2 font-body text-xs font-semibold text-white backdrop-blur-md">
                         {moment.label}
                       </span>
                     </div>
@@ -137,7 +130,7 @@ export default function CinematicStory() {
                   />
                 </ParallaxFrame>
                 <div className="grid gap-3 p-6 sm:p-8">
-                  <h3 className="font-oswald text-3xl font-bold uppercase leading-tight tracking-tight sm:text-4xl">
+                  <h3 className="font-oswald text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
                     {moment.title}
                   </h3>
                   <p className="max-w-lg text-sm leading-relaxed text-white/60 sm:text-base">
