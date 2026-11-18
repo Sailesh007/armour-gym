@@ -73,7 +73,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
     <div className="bg-[#141414] border border-white/10 p-6 sm:p-8 rounded-sm relative">
       <div className="mb-6">
         <h3 className="font-oswald text-2xl sm:text-3xl font-bold uppercase tracking-wide text-white">
-          MEMBERSHIP <span className="text-[#ff2a3b]">ENQUIRY</span>
+          MEMBERSHIP <span className="text-[#C8010A]">ENQUIRY</span>
         </h3>
         <p className="text-sm sm:text-base text-gray-300 mt-1.5 font-body">
           Visit our facility in Hathijan Circle or request plan details. Our front desk will get in touch with you shortly.
@@ -81,13 +81,13 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
       </div>
 
       {status === "success" ? (
-        <div className="p-6 bg-[#1a1a1a] border border-[#ff2a3b]/40 rounded-sm text-center space-y-4">
-          <CheckCircle2 className="w-12 h-12 text-[#ff2a3b] mx-auto" />
+        <div className="p-6 bg-[#1a1a1a] border border-[#C8010A]/40 rounded-sm text-center space-y-4">
+          <CheckCircle2 className="w-12 h-12 text-[#C8010A] mx-auto" />
           <h4 className="font-oswald text-2xl font-bold uppercase text-white">
             ENQUIRY RECEIVED
           </h4>
           <p className="text-sm sm:text-base text-gray-200 leading-relaxed font-body">
-            Thank you, <strong className="text-white">{formData.name}</strong>. We have received your interest for <strong className="text-[#ff2a3b]">{formData.program}</strong>. Our team will contact you shortly on {formData.phone}.
+            Thank you, <strong className="text-white">{formData.name}</strong>. We have received your interest for <strong className="text-[#C8010A]">{formData.program}</strong>. Our team will contact you shortly on {formData.phone}.
           </p>
 
           <div className="pt-2 flex flex-col gap-3">
@@ -151,7 +151,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
                 htmlFor={nameId}
                 className="block text-sm font-oswald uppercase tracking-wider font-bold text-gray-200 mb-1.5"
               >
-                Full Name <span className="text-[#ff2a3b]">*</span>
+                Full Name <span className="text-[#C8010A]">*</span>
               </label>
               <input
                 id={nameId}
@@ -161,7 +161,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
                 placeholder="Rahul Sharma"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors"
+                className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#C8010A] focus:ring-1 focus:ring-[#C8010A] transition-colors"
               />
             </div>
 
@@ -170,7 +170,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
                 htmlFor={phoneId}
                 className="block text-sm font-oswald uppercase tracking-wider font-bold text-gray-200 mb-1.5"
               >
-                Phone Number <span className="text-[#ff2a3b]">*</span>
+                Phone Number <span className="text-[#C8010A]">*</span>
               </label>
               <input
                 id={phoneId}
@@ -180,7 +180,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
                 placeholder="+91 98765 43210"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors"
+                className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#C8010A] focus:ring-1 focus:ring-[#C8010A] transition-colors"
               />
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
               id={programId}
               value={formData.program}
               onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors cursor-pointer"
+              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-[#C8010A] focus:ring-1 focus:ring-[#C8010A] transition-colors cursor-pointer"
             >
               {membershipPlans.map((plan) => (
                 <option key={plan.id} value={plan.label}>{plan.label}</option>
@@ -223,7 +223,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
               placeholder="rahul@example.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors"
+              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#C8010A] focus:ring-1 focus:ring-[#C8010A] transition-colors"
             />
           </div>
 
@@ -241,7 +241,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
               placeholder="Preferred visit time or fitness goals..."
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors resize-none"
+              className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-[#C8010A] focus:ring-1 focus:ring-[#C8010A] transition-colors resize-none"
             />
           </div>
 
@@ -249,7 +249,7 @@ export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
           <button
             type="submit"
             disabled={status === "loading"}
-            className="w-full py-4 bg-[#ff2a3b] hover:bg-white hover:text-black text-white font-oswald text-base font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer rounded-sm shadow-md"
+            className="w-full py-4 bg-[#C8010A] hover:bg-white hover:text-black text-white font-oswald text-base font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer rounded-sm shadow-md"
           >
             {status === "loading" ? (
               <>
