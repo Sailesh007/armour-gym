@@ -53,7 +53,8 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json({
       success: true,
-      verified: status === "PAID",
+      verified: environment === "PRODUCTION" && status === "PAID",
+      testPayment: environment === "SANDBOX" && status === "PAID",
       order_status: status,
       environment,
     });
