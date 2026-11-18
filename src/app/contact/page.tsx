@@ -11,6 +11,7 @@ import {
 export const metadata = {
   title: "Contact & Location | Armour 24-7 Gym Ahmedabad 382445",
   description: "Visit Armour 24-7 Gym in Hathijan Circle, Ahmedabad, Gujarat 382445. Inquire about membership plans or book a demo workout session.",
+  alternates: { canonical: "/contact" },
 };
 
 export default async function ContactPage({
