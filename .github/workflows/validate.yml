@@ -26,7 +26,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Lint redesigned homepage files
-        run: npx eslint src/app/page.tsx src/components/home src/components/CinematicStory.tsx src/components/HomeSections.tsx src/components/ProgramShowcase.tsx src/components/Navbar.tsx src/components/Footer.tsx
+        run: >-
+          npx eslint
+          src/app/page.tsx src/app/about/page.tsx src/app/contact/page.tsx
+          src/app/layout.tsx src/app/robots.ts src/app/sitemap.ts
+          src/app/payment/status/page.tsx
+          src/app/api/contact/route.ts
+          src/app/api/payment/create-order/route.ts
+          src/app/api/payment/verify/route.ts
+          src/components/home src/components/LeadForm.tsx
+          src/components/CinematicStory.tsx src/components/HomeSections.tsx
+          src/components/ProgramShowcase.tsx src/components/Parallax.tsx
+          src/components/Navbar.tsx src/components/Footer.tsx src/lib/membership.ts
       - name: Production build
         run: npm run build
       - name: Repository-wide lint baseline (nonblocking)
