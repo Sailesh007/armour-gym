@@ -35,7 +35,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isMobileMenuOpen) {
-        closeMenu();
+        setMobileMenuState({ open: false, pathname });
         toggleButtonRef.current?.focus();
       }
     };
@@ -51,7 +51,7 @@ export default function Navbar() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, pathname]);
 
   const toggleMenu = () => {
     setMobileMenuState((prev) => ({
