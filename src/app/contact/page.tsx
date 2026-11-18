@@ -6,7 +6,6 @@ import {
   Mail,
   Clock,
   MessageSquare,
-  ShieldCheck,
 } from "lucide-react";
 
 export const metadata = {
@@ -14,17 +13,23 @@ export const metadata = {
   description: "Visit Armour 24-7 Gym in Hathijan Circle, Ahmedabad, Gujarat 382445. Inquire about membership plans or book a demo workout session.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ plan?: string | string[]; program?: string | string[] }>;
+}) {
+  const params = await searchParams;
+  const initialPlan = typeof params.plan === "string" ? params.plan : undefined;
   return (
     <div className="bg-[#0a0a0a] text-white min-h-screen pt-28 md:pt-36 pb-20 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="max-w-7xl mx-auto text-center mb-14">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-white/10 text-[#ff2a3b] text-sm font-oswald font-bold uppercase tracking-widest mb-3 rounded-sm">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-white/10 text-[#C8010A] text-sm font-oswald font-bold uppercase tracking-widest mb-3 rounded-sm">
           <MapPin className="w-4 h-4" />
           Hathijan Circle • Ahmedabad 382445
         </div>
         <h1 className="font-oswald text-4xl sm:text-6xl font-bold uppercase tracking-tight text-white">
-          Contact &amp; <span className="text-[#ff2a3b]">Location</span>
+          Contact &amp; <span className="text-[#C8010A]">Location</span>
         </h1>
         <p className="max-w-xl mx-auto mt-3 text-base sm:text-lg text-gray-200 font-body leading-relaxed">
           Walk in to our Hathijan Circle facility during desk hours or submit your enquiry below for plan details and demo session bookings.
@@ -44,7 +49,7 @@ export default function ContactPage() {
                 Facility Address
               </h2>
               <div className="flex items-start gap-3.5">
-                <MapPin className="w-5 h-5 text-[#ff2a3b] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#C8010A] shrink-0 mt-0.5" />
                 <div className="space-y-1.5 font-body text-sm sm:text-base text-gray-200">
                   <p className="font-bold text-white text-base sm:text-lg">Armour 24-7 Gym</p>
                   <p>C-601, 602 Shalin Square, Hathijan Circle,</p>
@@ -54,7 +59,7 @@ export default function ContactPage() {
                       href="https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-[#ff2a3b] hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm sm:text-base font-semibold text-[#C8010A] hover:underline"
                     >
                       <MapPin className="w-4 h-4" />
                       <span>Open in Google Maps ↗</span>
@@ -71,7 +76,7 @@ export default function ContactPage() {
               </h2>
               <div className="space-y-4 text-sm sm:text-base font-body text-gray-200">
                 <div className="flex items-center gap-3.5">
-                  <Phone className="w-5 h-5 text-[#ff2a3b] shrink-0" />
+                  <Phone className="w-5 h-5 text-[#C8010A] shrink-0" />
                   <div>
                     <span className="text-xs text-gray-400 font-oswald font-bold uppercase tracking-wider block">Call Desk</span>
                     <a href="tel:+918160697163" className="hover:text-white transition-colors font-bold text-base sm:text-lg">
@@ -96,7 +101,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-center gap-3.5">
-                  <Mail className="w-5 h-5 text-[#ff2a3b] shrink-0" />
+                  <Mail className="w-5 h-5 text-[#C8010A] shrink-0" />
                   <div>
                     <span className="text-xs text-gray-400 font-oswald font-bold uppercase tracking-wider block">Official Email</span>
                     <a href="mailto:armour247gym@gmail.com" className="hover:text-white transition-colors font-semibold text-sm sm:text-base">
@@ -114,14 +119,14 @@ export default function ContactPage() {
               </h2>
               <div className="flex justify-between border-b border-white/5 pb-2.5">
                 <span>Biometric Member Entry</span>
-                <span className="text-[#ff2a3b] font-bold">24 Hours / 7 Days *</span>
+                <span className="text-[#C8010A] font-bold">24 Hours / 7 Days *</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2.5">
                 <span>Front Desk Staff &amp; Tours</span>
                 <span className="text-white font-semibold">06:00 AM – 10:00 PM</span>
               </div>
               <p className="text-xs sm:text-sm text-gray-400 pt-1 leading-relaxed">
-                * 24/7 access is subject to management rights and facility safety rules. See our <Link href="/terms-conditions" className="text-[#ff2a3b] underline font-semibold">Terms &amp; Conditions</Link>.
+                * 24/7 access is subject to management rights and facility safety rules. See our <Link href="/terms-conditions" className="text-[#C8010A] underline font-semibold">Terms &amp; Conditions</Link>.
               </p>
             </div>
 
@@ -129,7 +134,7 @@ export default function ContactPage() {
 
           {/* Right Column: Lead Form (7 cols) */}
           <div className="lg:col-span-7">
-            <LeadForm />
+            <LeadForm initialPlan={initialPlan} />
           </div>
 
         </div>
