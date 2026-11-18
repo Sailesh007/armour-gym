@@ -108,29 +108,6 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
   background-size: 24px 24px;
 }
 
-/* Marquee strip */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-container {
-  overflow: hidden;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-}
-
-.marquee-content {
-  display: flex;
-  animation: marquee 32s linear infinite;
-  width: max-content;
-}
-
-.marquee-content:hover {
-  animation-play-state: paused;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -160,7 +137,4 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
 ::selection { background: #C8010A; color: white; }
 @media (hover: hover) {
   a, button { -webkit-tap-highlight-color: transparent; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-content { animation: none !important; flex-wrap: wrap; justify-content: center; white-space: normal; }
 }
