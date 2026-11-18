@@ -25,6 +25,7 @@ export default function Hero() {
 
   return (
     <HeroParallax
+      id="homepage-hero"
       className="relative flex min-h-[100svh] items-center overflow-hidden pb-12 pt-28 sm:pt-36"
       background={
         <>

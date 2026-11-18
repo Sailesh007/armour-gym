@@ -1,69 +1,73 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { ParallaxFrame } from "@/components/Parallax";
 import { ButtonLink, Container, SectionTitle } from "@/components/home/ui";
 
-// One real photo plus a plain list. We only show photos of the actual gym, and we
-// do not have a photo for every program, so the list carries the detail instead.
+// One authentic ARMOUR photo paired with short, easy-to-scan program descriptions.
 const programs = [
-  {
-    title: "Strength training",
-    detail: "Barbell, dumbbell and plate-loaded machine work built around progressive overload.",
-  },
-  {
-    title: "Cardio training",
-    detail: "Treadmills, ellipticals and bikes for endurance and steady calorie burn.",
-  },
-  {
-    title: "Functional fitness",
-    detail: "Kettlebells, cables and bands for balance, core strength and agility.",
-  },
-  {
-    title: "Personal training",
-    detail: "One-on-one coaching with a certified trainer, matched to your goal.",
-  },
-];
+  { title: "Strength training", line: "Build strength with free weights and imported machines." },
+  { title: "Cardio training", line: "Improve stamina at your own pace." },
+  { title: "Functional fitness", line: "Move better with core and conditioning work." },
+  { title: "Personal training", line: "Focused coaching built around your goals." },
+] as const;
 
 export default function ProgramShowcase() {
   return (
-    <section id="programs" className="bg-[#0A0B0D] py-20 md:py-28">
+    <section id="programs" aria-labelledby="programs-heading" className="bg-[#0A0B0D] py-20 md:py-28">
       <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           <ParallaxFrame
-            speed={8}
-            className="relative h-[26rem] overflow-hidden bg-[#151515] sm:h-[34rem] lg:col-span-5 lg:h-[38rem]"
+            speed={7}
+            className="relative h-[24rem] overflow-hidden bg-[#151515] sm:h-[34rem] lg:col-span-5 lg:h-[40rem]"
+            overlay={
+              <div className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-black/75 via-black/10 to-transparent p-7">
+                <span className="font-oswald text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+                  Every rep counts.
+                </span>
+              </div>
+            }
           >
             <Image
               src="/images/img_7848.webp"
-              alt="Power rack and lifting platform at ARMOUR 24-7 Gym"
+              alt="Actual power rack and lifting platform inside ARMOUR 24-7 Gym"
               fill
-              sizes="(max-width: 1024px) 100vw, 40vw"
+              sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover"
               style={{ objectPosition: "center 55%" }}
             />
           </ParallaxFrame>
 
           <div className="lg:col-span-7">
-            <SectionTitle
-              title="Train your way"
-              lead="Different goals, one floor. Pick a focus and our coaches will help you build it."
-            />
-
-            <ul className="mt-10">
-              {programs.map((p) => (
-                <li key={p.title} className="border-t border-white/15 py-6 last:border-b">
-                  <h3 className="font-oswald text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 max-w-[56ch] font-body text-base leading-relaxed text-gray-300">
-                    {p.detail}
-                  </p>
+            <div id="programs-heading">
+              <SectionTitle
+                title="Train your way"
+                lead="Whatever your starting point, find the right way to move."
+              />
+            </div>
+            <ol className="mt-10 border-t border-white/15">
+              {programs.map((program, index) => (
+                <li
+                  key={program.title}
+                  className="group grid grid-cols-[2.5rem_1fr_auto] items-start gap-3 border-b border-white/15 py-6 transition-colors duration-300 hover:border-[#C8010A]/60 sm:grid-cols-[3rem_1fr_auto] sm:gap-5"
+                >
+                  <span className="mt-1 font-oswald text-sm font-medium tracking-wider text-[#E33B42]">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-oswald text-2xl font-semibold tracking-tight text-white transition-colors group-hover:text-[#FF858A] sm:text-3xl">
+                      {program.title}
+                    </h3>
+                    <p className="mt-2 max-w-[45ch] text-sm leading-relaxed text-white/60 sm:text-base">
+                      {program.line}
+                    </p>
+                  </div>
+                  <ArrowUpRight aria-hidden="true" className="mt-2 size-5 text-white/35 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#FF858A]" />
                 </li>
               ))}
-            </ul>
-
-            <div className="mt-8">
+            </ol>
+            <div className="mt-9">
               <ButtonLink href="/contact" arrow>
-                Ask about a program
+                Ask about training
               </ButtonLink>
             </div>
           </div>

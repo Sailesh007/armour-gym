@@ -62,7 +62,9 @@ export function HeroParallax({
   overlay,
   children,
   className = "",
+  id,
 }: {
+  id?: string;
   /** The hero photo + its gradients (fills the layer). */
   background: ReactNode;
   /** Optional layer between photo and copy (e.g. particle canvas). */
@@ -86,7 +88,7 @@ export function HeroParallax({
   const fgOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   return (
-    <section ref={ref} className={className}>
+    <section id={id} ref={ref} className={className}>
       <motion.div
         style={reduce ? undefined : { y: bgY, scale: bgScale }}
         className="absolute inset-0 -top-16 -bottom-16 z-0 will-change-transform"

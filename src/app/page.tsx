@@ -1,3 +1,28 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  name: "ARMOUR 24-7 GYM",
+  description: "Fitness facility with strength training, imported equipment and 24/7 member access in Hathijan, Ahmedabad.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app",
+  telephone: "+918160697163",
+  image: new URL("/images/hero_armour.webp", process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app").toString(),
+  hasMap: "https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "C-601, 602 Shalin Square, Hathijan Circle",
+    addressLocality: "Ahmedabad",
+    addressRegion: "Gujarat",
+    postalCode: "382445",
+    addressCountry: "IN",
+  },
+};
+
 import CinematicStory from "@/components/CinematicStory";
 import ProgramShowcase from "@/components/ProgramShowcase";
 import { WhyArmour } from "@/components/HomeSections";
@@ -6,7 +31,6 @@ import Gallery from "@/components/home/Gallery";
 import PlansPreview from "@/components/home/PlansPreview";
 import Reviews from "@/components/home/Reviews";
 import Bmi from "@/components/home/Bmi";
-import Visit from "@/components/home/Visit";
 import MobileActionBar from "@/components/home/MobileActionBar";
 
 // Server component. Only the pieces that need browser state (hero strip, story scroll,
@@ -16,6 +40,10 @@ import MobileActionBar from "@/components/home/MobileActionBar";
 export default function HomePage() {
   return (
     <div className="bg-[#0a0a0a] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Hero />
       <WhyArmour />
       <CinematicStory />
@@ -24,7 +52,6 @@ export default function HomePage() {
       <PlansPreview />
       <Reviews />
       <Bmi />
-      <Visit />
       <MobileActionBar />
       {/* Keeps the last content clear of the fixed action bar on phones */}
       <div className="h-14 md:hidden" aria-hidden="true" />
