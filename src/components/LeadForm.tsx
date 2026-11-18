@@ -6,7 +6,7 @@ import { Send, CheckCircle2, AlertCircle, Loader2, MessageSquare } from "lucide-
 
 export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
   const requestedPlan = findMembershipPlan(initialPlan);
-  const startingProgram = requestedPlan?.label ?? membershipPlans[0].label;
+  const startingProgram: string = requestedPlan?.label ?? membershipPlans[0].label;
   const nameId = useId();
   const phoneId = useId();
   const programId = useId();
