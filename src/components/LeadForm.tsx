@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, FormEvent, useId } from "react";
-import { Send, CheckCircle2, AlertCircle, Loader2, MessageSquare, Phone } from "lucide-react";
+import { useState, type FormEvent, useId } from "react";
+import { additionalInterests, findMembershipPlan, membershipPlans } from "@/lib/membership";
+import { Send, CheckCircle2, AlertCircle, Loader2, MessageSquare } from "lucide-react";
 
-export default function LeadForm() {
+export default function LeadForm({ initialPlan }: { initialPlan?: string }) {
+  const requestedPlan = findMembershipPlan(initialPlan);
+  const startingProgram = requestedPlan?.label ?? membershipPlans[0].label;
   const nameId = useId();
   const phoneId = useId();
   const programId = useId();
@@ -14,12 +17,13 @@ export default function LeadForm() {
     name: "",
     email: "",
     phone: "",
-    program: "Demo Workout Session (₹500)",
+    program: startingProgram,
     message: "",
   });
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [website, setWebsite] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -30,7 +34,7 @@ export default function LeadForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website }),
       });
 
       if (!res.ok) {
@@ -55,13 +59,14 @@ export default function LeadForm() {
       name: "",
       email: "",
       phone: "",
-      program: "Demo Workout Session (₹500)",
+      program: startingProgram,
       message: "",
     });
+    setWebsite("");
   };
 
   const whatsappUrl = `https://wa.me/918160697163?text=${encodeURIComponent(
-    `Hello Armour 24-7 Gym, I have submitted an enquiry on your website.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nPlan/Program: ${formData.program}`
+    `Hello Armour 24-7 Gym, I would like to enquire about your membership plans.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nPlan/Program: ${formData.program}`
   )}`;
 
   return (
@@ -107,12 +112,37 @@ export default function LeadForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Honeypot: real visitors and assistive tech do not interact with this field. */}
+          <div className="absolute -left-[10000px]" aria-hidden="true">
+            <label htmlFor="enquiry-website">Leave this field empty</label>
+            <input
+              id="enquiry-website"
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
           {status === "error" && (
             <div className="p-3 bg-red-950/40 border border-red-500/60 text-red-200 text-sm flex items-center gap-2 rounded-sm" role="alert">
               <AlertCircle className="w-5 h-5 shrink-0" />
               <span>{errorMessage || "Submission failed. Please check your details."}</span>
             </div>
           )}
+          {status === "error" && (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF858A] underline underline-offset-4"
+            >
+              <MessageSquare aria-hidden="true" className="size-4" />
+              Send your enquiry via WhatsApp instead
+            </a>
+          )}
+
 
           {/* Full Name & Phone Number */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -169,13 +199,12 @@ export default function LeadForm() {
               onChange={(e) => setFormData({ ...formData, program: e.target.value })}
               className="w-full bg-[#0a0a0a] border border-white/15 rounded-sm px-4 py-3 text-base text-white focus:outline-none focus:border-[#ff2a3b] focus:ring-1 focus:ring-[#ff2a3b] transition-colors cursor-pointer"
             >
-              <option value="Demo Workout Session (₹500)">Demo Workout Session — ₹500</option>
-              <option value="1 Month Membership (₹3,500)">1 Month Membership — ₹3,500</option>
-              <option value="3 Months Membership (₹6,500)">3 Months Membership — ₹6,500</option>
-              <option value="6 Months Membership (₹9,000)">6 Months Membership — ₹9,000</option>
-              <option value="12 Months Membership (₹15,000)">12 Months Membership — ₹15,000</option>
-              <option value="1-on-1 Personal Training Enquiry">1-on-1 Personal Training Enquiry</option>
-              <option value="Ladies Fitness Program">Ladies Fitness Program</option>
+              {membershipPlans.map((plan) => (
+                <option key={plan.id} value={plan.label}>{plan.label}</option>
+              ))}
+              {additionalInterests.map((interest) => (
+                <option key={interest} value={interest}>{interest}</option>
+              ))}
             </select>
           </div>
 
