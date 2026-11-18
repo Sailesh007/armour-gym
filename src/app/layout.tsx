@@ -42,7 +42,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${oswald.variable} ${montserrat.variable} bg-[#0a0a0a] text-white font-body antialiased min-h-screen flex flex-col selection:bg-[#ff2a3b] selection:text-white`}
+        className={`${oswald.variable} ${montserrat.variable} bg-[#0a0a0a] text-white font-body antialiased min-h-screen flex flex-col selection:bg-[#C8010A] selection:text-white`}
       >
         <Navbar />
         <main className="flex-1">
