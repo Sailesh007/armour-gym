@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #ff2a3b;
-  --color-brand-red: #ff2a3b;
+  --color-brand: #C8010A;
+  --color-brand-red: #C8010A;
   --color-gym-dark: #0a0a0a;
   --color-gym-card: #141414;
   --color-gym-gray: #888888;
@@ -12,13 +12,14 @@
 }
 
 :root {
-  --brand-red: #ff2a3b;
+  --brand-red: #C8010A;
   --gym-dark: #0a0a0a;
   --gym-card: #141414;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
   color-scheme: dark;
   font-size: 16px;
 }
@@ -37,7 +38,7 @@ body {
 
 /* Accessible focus styling */
 :focus-visible {
-  outline: 2px solid #ff2a3b;
+  outline: 2px solid #C8010A;
   outline-offset: 2px;
 }
 
@@ -60,15 +61,15 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
 }
 
 .text-brand {
-  color: #ff2a3b;
+  color: #C8010A;
 }
 
 .bg-brand {
-  background-color: #ff2a3b;
+  background-color: #C8010A;
 }
 
 .border-brand {
-  border-color: #ff2a3b;
+  border-color: #C8010A;
 }
 
 /* Refined UI/UX Card Surfaces */
@@ -86,8 +87,8 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
 
 .gym-card-featured {
   background: linear-gradient(180deg, #181414 0%, #121212 100%);
-  border: 1.5px solid #ff2a3b;
-  box-shadow: 0 0 35px -5px rgba(255, 42, 59, 0.25);
+  border: 1.5px solid #C8010A;
+  box-shadow: 0 0 35px -5px rgba(200, 1, 10, 0.25);
 }
 
 /* Parallax Container Support */
@@ -99,7 +100,7 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
 
 /* Subtle texture & ambient backdrops */
 .ambient-glow {
-  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 42, 59, 0.08), transparent 75%);
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(200, 1, 10, 0.08), transparent 75%);
 }
 
 .grid-pattern {
@@ -142,7 +143,7 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff2a3b;
+  background: #C8010A;
 }
 
 /* Respect user preference for reduced motion */
@@ -153,4 +154,13 @@ h1, h2, h3, h4, h5, h6, .font-oswald {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Modern editorial motion and interaction polish */
+::selection { background: #C8010A; color: white; }
+@media (hover: hover) {
+  a, button { -webkit-tap-highlight-color: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content { animation: none !important; flex-wrap: wrap; justify-content: center; white-space: normal; }
 }
