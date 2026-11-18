@@ -1,86 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LeadForm from "@/components/LeadForm";
 import CinematicStory from "@/components/CinematicStory";
-import AntigravityAnimation from "@/components/AntigravityAnimation";
-import {
-  HeroParallax,
-  ParallaxBg,
-  ParallaxFrame,
-  Reveal,
-} from "@/components/Parallax";
-import {
-  ArrowRight,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  Clock,
-  ShieldCheck,
-  Dumbbell,
-  Users,
-  CheckCircle2,
-  X,
-  MapPin,
-  Flame,
-  Info,
-  Sparkles,
-  Zap,
-} from "lucide-react";
-
-// Programs data for tabbed section (using clean dummy gym imagery)
-const programsData = {
-  strength: {
-    title: "Strength & Hypertrophy",
-    badge: "Most Popular",
-    image: "/images/dummy-gallery-1.webp",
-    desc: "Structured weight training using Olympic barbells, calibrated plates, dumbbells, and plate-loaded machines. Engineered for raw strength and progressive overload.",
-    highlights: [
-      "Barbell squat, bench press, and deadlift mechanics",
-      "Plate-loaded iso-lateral machines for targeted hypertrophy",
-      "Heavy dumbbell sets and Olympic barbell stations",
-      "Personalized form checks from certified floor coaches",
-    ],
-  },
-  cardio: {
-    title: "Cardio & Stamina Conditioning",
-    badge: "Cardio Zone",
-    image: "/images/dummy-gallery-3.webp",
-    desc: "Improve cardiovascular endurance, burn calories, and build stamina with modern treadmills, ellipticals, cycling bikes, and bodyweight circuits.",
-    highlights: [
-      "Heart-rate paced endurance workouts",
-      "Interval conditioning and calorie-burn circuits",
-      "Pre-workout dynamic mobility and warmup drills",
-      "Low-impact machine options for joint health",
-    ],
-  },
-  functional: {
-    title: "Functional & Core Training",
-    badge: "All Levels",
-    image: "/images/dummy-gallery-4.webp",
-    desc: "Multi-planar movements to improve balance, core strength, agility, and day-to-day athleticism using kettlebells, cables, resistance bands, and turf work.",
-    highlights: [
-      "Rotational and anti-rotational core stabilization",
-      "Functional movement patterns to prevent injuries",
-      "Adjustable dual-pulley cable setups",
-      "Mobility and post-workout active recovery",
-    ],
-  },
-  personal: {
-    title: "1-on-1 Personal Training",
-    badge: "Dedicated Coach",
-    image: "/images/dummy-gallery-2.webp",
-    desc: "Work directly with a certified personal trainer dedicated to your specific fitness targets, whether you are beginning your fitness journey or preparing for competitive lifting.",
-    highlights: [
-      "Individualized exercise programming and weekly adjustments",
-      "One-on-one form correction on every repetition",
-      "Nutritional guidance and macronutrient tracking",
-      "Flexible slot scheduling based on your routine",
-    ],
-  },
-};
+import ProgramShowcase from "@/components/ProgramShowcase";
+import { WhyArmour, LadiesSpotlight, MembershipPreview } from "@/components/HomeSections";
+import { HeroParallax, ParallaxFrame, Reveal } from "@/components/Parallax";
+import { ArrowRight, Star, ChevronLeft, ChevronRight, Clock, MapPin, Info } from "lucide-react";
 
 // Real Google Reviews from Armour Gym's Google Maps listing
 const googleReviews = [
@@ -114,78 +42,13 @@ const googleReviews = [
   },
 ];
 
-// Blog posts with practical information
-const blogPosts = [
-  {
-    id: 1,
-    title: "5 Compound Lifts That Form the Basis of Strength",
-    category: "Training Guide",
-    date: "Fitness Resource",
-    readTime: "4 min read",
-    image: "/images/dummy-gallery-1.webp",
-    desc: "Learn why multi-joint compound exercises recruit more muscle fibers and deliver better functional strength than isolation movements alone.",
-    content: [
-      "Compound exercises are movements that involve more than one joint and work multiple muscle groups simultaneously.",
-      "1. Barbell Squat: Engages the quadriceps, hamstrings, glutes, and core musculature.",
-      "2. Deadlift: Strengthens the entire posterior chain including hamstrings, glutes, lats, and lower back.",
-      "3. Overhead Press: Develops shoulder stability, triceps, and core balance while standing.",
-      "4. Bench Press: Primary builder for chest, front shoulders, and triceps pressing power.",
-      "5. Barbell Row / Pull-Up: Essential for upper back thickness, posture, and balanced shoulder mechanics.",
-      "At Armour 24-7 Gym, dedicated squat platforms and Olympic weight plates provide the stable base needed to perform these lifts safely."
-    ],
-  },
-  {
-    id: 2,
-    title: "A Practical Approach to Pre and Post Workout Nutrition",
-    category: "Nutrition",
-    date: "Fitness Resource",
-    readTime: "4 min read",
-    image: "/images/dummy-gallery-3.webp",
-    desc: "How simple meal timing and adequate daily protein support muscle recovery and steady workout energy.",
-    content: [
-      "You do not need complicated diets to support your gym training. A few consistent habits make the biggest difference:",
-      "Pre-Workout (1 to 2 hours before): Have easily digestible carbohydrates paired with a moderate amount of protein (such as oats with curd, banana with eggs, or a roti roll). This replenishes glycogen stores so you do not feel sluggish during lifting.",
-      "Hydration: Even mild dehydration reduces strength and causes premature muscle fatigue. Drink plenty of water throughout the day, not just while exercising.",
-      "Post-Workout: Consume 20 to 30 grams of protein along with carbohydrates within a couple of hours after training to assist muscle tissue repair.",
-      "Daily Consistency: The most important nutritional factor remains hitting your overall daily calorie and protein requirements consistently over months."
-    ],
-  },
-  {
-    id: 3,
-    title: "Why Mobility and Recovery Are Essential for Lifters",
-    category: "Recovery",
-    date: "Fitness Resource",
-    readTime: "3 min read",
-    image: "/images/dummy-gallery-6.webp",
-    desc: "Simple mobility drills that protect your joints, relieve desk-job stiffness, and improve lifting mechanics.",
-    content: [
-      "Strength training creates microscopic stress on muscles and connective tissues. Proper recovery allows that tissue to rebuild stronger.",
-      "Dynamic Warmups: Spend 5 to 8 minutes performing arm circles, hip openers, and bodyweight squats before touching a barbell. This lubricates joints with synovial fluid.",
-      "Addressing Sitting Posture: Hours spent sitting at a desk tighten hip flexors and round the thoracic spine. Daily mobility work directly helps restore full range of motion for squats and presses.",
-      "Sleep and Rest Days: Muscle growth happens during rest, especially deep sleep. Schedule at least one to two rest days every week to let your nervous system recover."
-    ],
-  },
-];
-
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<keyof typeof programsData>("strength");
-  const [selectedBlog, setSelectedBlog] = useState<(typeof blogPosts)[0] | null>(null);
   const [activeReview, setActiveReview] = useState(0);
-
-  // Auto-advance mobile reviews
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveReview((prev) => (prev + 1) % googleReviews.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   // BMI Calculator State
   const [bmiGender, setBmiGender] = useState<"male" | "female">("male");
   const [bmiHeight, setBmiHeight] = useState<number>(170);
   const [bmiWeight, setBmiWeight] = useState<number>(70);
-
-  const currentProgram = programsData[activeTab];
 
   // BMI Calculations
   const heightInMeters = bmiHeight / 100;
@@ -294,161 +157,10 @@ export default function HomePage() {
 
       <CinematicStory />
 
-      {/* ============================================================ */}
-      {/* 2. CORE ADVANTAGES — Compact & Concrete Gym Facts            */}
-      {/* ============================================================ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0e0e0e] border-y border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="eyebrow text-sm sm:text-base text-[#C8010A] font-bold block mb-2 tracking-widest">
-              WHY TRAIN WITH US
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-              The Armour 24-7 <span className="text-[#C8010A]">Standard</span>
-            </h2>
-            <p className="text-base sm:text-lg text-gray-200 mt-3 font-body leading-relaxed">
-              Everything required for consistent strength progression under one roof.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                Icon: Clock,
-                title: "24/7 Biometric Access",
-                text: "Train early morning, afternoon, or late night. Registered members enter seamlessly via fingerprint and facial recognition.",
-              },
-              {
-                Icon: Dumbbell,
-                title: "Heavy Iron & Machines",
-                text: "Full setup of plate-loaded machines, Olympic barbells, heavy dumbbells, squat racks, and dedicated cable stations.",
-              },
-              {
-                Icon: Users,
-                title: "Certified Floor Trainers",
-                text: "Experienced trainers on the floor to correct your form, answer questions, and offer guidance on workout structure.",
-              },
-              {
-                Icon: ShieldCheck,
-                title: "Clean, Monitored Facility",
-                text: "High-capacity air conditioning, sanitized workout areas, secure lockers, changing rooms, and 24/7 CCTV surveillance.",
-              },
-            ].map(({ Icon, title, text }, i) => (
-              <Reveal key={title} delay={i * 0.1} className="h-full">
-                <div className="h-full bg-[#141414] border border-white/10 p-6 sm:p-7 rounded-sm hover:border-[#C8010A]/40 hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-12 h-12 rounded-sm bg-[#C8010A]/10 text-[#C8010A] flex items-center justify-center mb-5">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-oswald font-bold uppercase text-xl sm:text-2xl text-white mb-2.5">
-                    {title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                    {text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProgramShowcase />
 
       {/* ============================================================ */}
-      {/* 3. TRAINING PROGRAMS — Practical Tabbed Interface            */}
-      {/* ============================================================ */}
-      <section id="programs" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
-            <div>
-              <span className="eyebrow text-sm sm:text-base text-[#C8010A] font-bold block mb-1 tracking-widest">
-                WORKOUT OPTIONS
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-                Training <span className="text-[#C8010A]">Programs</span>
-              </h2>
-            </div>
-            <p className="text-base sm:text-lg text-gray-200 max-w-md leading-relaxed font-body">
-              Whether your goal is building muscle, increasing stamina, or working 1-on-1 with a personal trainer, our floor setup supports every level.
-            </p>
-          </div>
-
-          {/* Program Tabs */}
-          <div className="flex flex-wrap gap-2.5 mb-8 border-b border-white/10 pb-4" role="tablist">
-            {(Object.keys(programsData) as Array<keyof typeof programsData>).map((key) => {
-              const item = programsData[key];
-              const isSelected = activeTab === key;
-              return (
-                <button
-                  key={key}
-                  role="tab"
-                  aria-selected={isSelected}
-                  onClick={() => setActiveTab(key)}
-                  className={`px-5 sm:px-6 py-3 text-sm sm:text-base font-oswald uppercase font-bold tracking-wider rounded-sm transition-colors cursor-pointer ${
-                    isSelected
-                      ? "bg-[#C8010A] text-white shadow-md"
-                      : "bg-[#141414] text-gray-200 hover:text-white"
-                  }`}
-                >
-                  {item.title}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Tab Content Display */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#141414] border border-white/10 p-6 sm:p-8 rounded-sm">
-            <div className="lg:col-span-5 relative h-72 sm:h-96 rounded-sm overflow-hidden bg-black/40">
-              <Image
-                src={currentProgram.image}
-                alt={currentProgram.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover"
-              />
-              <span className="absolute top-3 left-3 bg-[#C8010A] text-white text-xs font-oswald font-bold uppercase px-3 py-1 rounded-sm shadow-md">
-                {currentProgram.badge}
-              </span>
-            </div>
-
-            <div className="lg:col-span-7 space-y-5">
-              <h3 className="text-3xl sm:text-4xl font-oswald font-bold uppercase text-white leading-tight">
-                {currentProgram.title}
-              </h3>
-              <p className="text-base sm:text-lg text-gray-200 leading-relaxed font-body">
-                {currentProgram.desc}
-              </p>
-
-              <div className="space-y-3 pt-1">
-                <h4 className="text-sm sm:text-base font-oswald font-bold uppercase tracking-wider text-gray-300">
-                  Program Inclusions:
-                </h4>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base text-gray-200 font-body">
-                  {currentProgram.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-5 h-5 text-[#C8010A] shrink-0 mt-0.5" />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#C8010A] hover:bg-white hover:text-black text-white font-oswald text-sm sm:text-base uppercase font-bold tracking-wider px-8 py-4 rounded-sm transition-colors shadow-md"
-                >
-                  <span>Enquire About This Program</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* 4. FACILITY GALLERY — Clean Athletic Gym Photography          */}
+      {/* FACILITY GALLERY — Real gym photography                       */}
       {/* ============================================================ */}
       <section id="gallery" className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0e0e0e] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
@@ -458,31 +170,32 @@ export default function HomePage() {
                 FACILITY SHOWCASE
               </span>
               <h2 className="text-3xl sm:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-                The Gym <span className="text-[#C8010A]">Floor</span>
+                Inside <span className="text-[#C8010A]">ARMOUR</span>
               </h2>
             </div>
             <p className="text-base sm:text-lg text-gray-200 max-w-md leading-relaxed font-body">
-              Equipped with dedicated strength zones, Olympic lifting stations, cardio lines, and locker facilities in Hathijan Circle.
+              A closer look at where your next chapter begins.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {[
-              { src: "/images/dummy-gallery-1.webp", alt: "Main Gym Training Floor", caption: "Main Training Floor & Power Racks" },
-              { src: "/images/dummy-gallery-2.webp", alt: "Plate Loaded Machines and Leg Press", caption: "Plate-Loaded Strength Machines" },
-              { src: "/images/dummy-gallery-3.webp", alt: "Cardio Equipment and Treadmills", caption: "Cardio & Stamina Line" },
-              { src: "/images/dummy-gallery-4.webp", alt: "Dumbbells and Free Weight Racks", caption: "Heavy Dumbbells & Free Weights" },
-              { src: "/images/dummy-gallery-5.webp", alt: "Cable Rigs and Upper Body Stations", caption: "Dual-Cable Towers & Upper Body Rigs" },
-              { src: "/images/dummy-gallery-6.webp", alt: "Armour Gym Training Atmosphere", caption: "Air-Conditioned Workout Space" },
+              { src: "/images/dummy-gallery-1.webp", alt: "Main gym training floor", caption: "THE TRAINING FLOOR" },
+              { src: "/images/dummy-gallery-2.webp", alt: "Strength training machines", caption: "STRENGTH EQUIPMENT" },
+              { src: "/images/dummy-gallery-3.webp", alt: "Cardio training equipment", caption: "CARDIO ZONE" },
+              { src: "/images/dummy-gallery-4.webp", alt: "Dumbbells and free-weight racks", caption: "FREE WEIGHTS" },
             ].map((tile, i) => (
-              <Reveal key={tile.src} delay={(i % 3) * 0.1}>
-                {/* Photo drifts inside the frame at a different speed per column for depth */}
+              <Reveal
+                key={tile.src}
+                delay={(i % 2) * 0.09}
+                className={i === 0 || i === 3 ? "lg:col-span-2" : ""}
+              >
                 <ParallaxFrame
-                  speed={[8, 14, 8][i % 3]}
-                  className="relative h-64 sm:h-72 rounded-sm overflow-hidden group bg-black/40"
+                  speed={i % 2 === 0 ? 8 : 12}
+                  className="group relative h-72 overflow-hidden bg-black/40 sm:h-80 lg:h-[25rem]"
                   overlay={
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-5">
-                      <span className="text-base sm:text-lg font-oswald uppercase tracking-wider text-white font-bold">
+                    <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/85 via-black/10 to-transparent p-6 sm:p-8">
+                      <span className="font-oswald text-xl font-bold uppercase tracking-wider text-white sm:text-2xl">
                         {tile.caption}
                       </span>
                     </div>
@@ -492,8 +205,8 @@ export default function HomePage() {
                     src={tile.src}
                     alt={tile.alt}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes={i === 0 || i === 3 ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 1024px) 100vw, 34vw"}
+                    className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
                   />
                 </ParallaxFrame>
               </Reveal>
@@ -502,223 +215,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* 5. PARALLAX MOMENTUM BREAK — Unique Facility Pillars         */}
-      {/* ============================================================ */}
-      <section className="relative py-28 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-white/10">
-        {/* Parallax Background — scroll-linked to THIS section (works at any screen size) */}
-        <ParallaxBg distance={18}>
-          <Image
-            src="/images/dummy-break.webp"
-            alt="Armour 24-7 Gym Athletic Arena"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0e0e0e]/80 via-transparent to-[#0a0a0a]/80" />
-        </ParallaxBg>
+      <WhyArmour />
 
-        {/* Antigravity floating geometric particles */}
-        <AntigravityAnimation
-          count={20}
-          speed={0.5}
-          colors={["#C8010A", "#ffffff", "#888888"]}
-          shape="triangle"
-          gravity={-0.02}
-          opacity={0.5}
-        />
+      <LadiesSpotlight />
 
-        {/* Parallax Foreground Content — Non-repetitive, High-impact Value */}
-        <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/15 rounded-full text-gray-200 text-sm font-oswald uppercase tracking-widest backdrop-blur-sm font-bold">
-            <span className="w-2 h-2 rounded-full bg-[#C8010A]" />
-            EXPERIENCE THE ARMOUR ADVANTAGE
-          </div>
-
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-oswald font-bold uppercase text-white leading-tight tracking-tight">
-            Engineered For Serious Lifting.<br />
-            <span className="text-[#C8010A]">Zero Distractions.</span>
-          </h2>
-
-          <p className="text-base sm:text-xl text-gray-100 font-body max-w-2xl mx-auto leading-relaxed">
-            Step onto a gym floor built for raw, measurable progress. From calibrated barbell platforms to smooth plate-loaded isolation machines, everything is curated for consistent training.
-          </p>
-
-          {/* 4 Concrete Facility Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 max-w-5xl mx-auto border-t border-white/10 text-left">
-            <div className="bg-black/70 border border-white/10 p-5 sm:p-6 rounded-sm backdrop-blur-sm">
-              <div className="w-9 h-9 rounded-sm bg-[#C8010A]/10 text-[#C8010A] flex items-center justify-center mb-3.5">
-                <Dumbbell className="w-5 h-5" />
-              </div>
-              <h3 className="font-oswald font-bold uppercase text-lg sm:text-xl text-white mb-1.5">
-                Olympic Calibrated Gear
-              </h3>
-              <p className="text-sm sm:text-base text-gray-300 font-body leading-relaxed">
-                Dedicated deadlift platforms and competition-grade barbell setups.
-              </p>
-            </div>
-
-            <div className="bg-black/70 border border-white/10 p-5 sm:p-6 rounded-sm backdrop-blur-sm">
-              <div className="w-9 h-9 rounded-sm bg-[#C8010A]/10 text-[#C8010A] flex items-center justify-center mb-3.5">
-                <Zap className="w-5 h-5" />
-              </div>
-              <h3 className="font-oswald font-bold uppercase text-lg sm:text-xl text-white mb-1.5">
-                Plate-Loaded Isolation
-              </h3>
-              <p className="text-sm sm:text-base text-gray-300 font-body leading-relaxed">
-                Iso-lateral machines supporting natural human movement mechanics.
-              </p>
-            </div>
-
-            <div className="bg-black/70 border border-white/10 p-5 sm:p-6 rounded-sm backdrop-blur-sm">
-              <div className="w-9 h-9 rounded-sm bg-[#C8010A]/10 text-[#C8010A] flex items-center justify-center mb-3.5">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="font-oswald font-bold uppercase text-lg sm:text-xl text-white mb-1.5">
-                Biometric Turnstile
-              </h3>
-              <p className="text-sm sm:text-base text-gray-300 font-body leading-relaxed">
-                Seamless fingerprint and facial recognition entry around the clock.
-              </p>
-            </div>
-
-            <div className="bg-black/70 border border-white/10 p-5 sm:p-6 rounded-sm backdrop-blur-sm">
-              <div className="w-9 h-9 rounded-sm bg-[#C8010A]/10 text-[#C8010A] flex items-center justify-center mb-3.5">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <h3 className="font-oswald font-bold uppercase text-lg sm:text-xl text-white mb-1.5">
-                Hygienic Climate Arena
-              </h3>
-              <p className="text-sm sm:text-base text-gray-300 font-body leading-relaxed">
-                High-capacity air conditioning, sanitized floors, lockers, and showers.
-              </p>
-            </div>
-          </div>
-
-          <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/pricing"
-              className="bg-[#C8010A] hover:bg-white hover:text-black text-white font-oswald font-bold uppercase text-sm sm:text-base px-9 py-4 tracking-wider transition-colors rounded-sm inline-flex items-center gap-2 shadow-lg"
-            >
-              <span>Explore Membership Rates</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/contact?plan=demo"
-              className="bg-white/10 hover:bg-white/20 text-white font-oswald font-bold uppercase text-sm sm:text-base px-8 py-4 tracking-wider transition-colors rounded-sm"
-            >
-              Book Demo Session (₹500)
-            </Link>
-          </div>
-        </div>
-      </section>
+      <MembershipPreview />
 
       {/* ============================================================ */}
-      {/* 6. LADIES FITNESS PROGRAM — Welcoming & Respectful Tone       */}
-      {/* ============================================================ */}
-      <section id="ladies-program" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Visual Column */}
-            <ParallaxFrame
-              speed={10}
-              className="lg:col-span-5 relative h-80 sm:h-[480px] rounded-sm overflow-hidden border border-white/10 bg-black/40"
-              overlay={
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 bg-black/80 p-5 rounded-sm border border-white/10">
-                    <p className="text-base font-oswald font-bold uppercase text-white">
-                      Safe &amp; Welcoming Workout Environment
-                    </p>
-                    <p className="text-sm text-gray-300 font-body mt-1">
-                      Comfortable, clean, and guided directly on the floor.
-                    </p>
-                  </div>
-                </>
-              }
-            >
-              <Image
-                src="/images/dummy-gallery-5.webp"
-                alt="Ladies Fitness Training Area at Armour 24-7 Gym"
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </ParallaxFrame>
-
-            {/* Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <span className="eyebrow text-sm sm:text-base text-[#C8010A] font-bold block mb-1 tracking-widest">
-                  DEDICATED GUIDANCE
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-                  Ladies Fitness <span className="text-[#C8010A]">Program</span>
-                </h2>
-                <p className="text-base sm:text-lg text-gray-200 leading-relaxed mt-3 font-body">
-                  A comfortable and motivating training environment for women of all fitness levels. Whether your priority is fat loss, toning, core stability, or functional stamina, our certified coaches ensure you feel confident using every machine.
-                </p>
-              </div>
-
-              {/* 4 Clear Feature Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-[#141414] border border-white/10 p-5 rounded-sm">
-                  <h3 className="text-base sm:text-lg font-oswald font-bold uppercase text-white mb-1.5">
-                    Structured Fat Loss &amp; Toning
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                    Workouts designed to combine moderate weights and cardio intervals for steady calorie burn.
-                  </p>
-                </div>
-
-                <div className="bg-[#141414] border border-white/10 p-5 rounded-sm">
-                  <h3 className="text-base sm:text-lg font-oswald font-bold uppercase text-white mb-1.5">
-                    Beginner-Friendly Coaching
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                    Step-by-step instruction on posture, machine setup, and weights without intimidation.
-                  </p>
-                </div>
-
-                <div className="bg-[#141414] border border-white/10 p-5 rounded-sm">
-                  <h3 className="text-base sm:text-lg font-oswald font-bold uppercase text-white mb-1.5">
-                    Female Trainer Availability
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                    Option to train with certified female fitness coaches for customized personal guidance.
-                  </p>
-                </div>
-
-                <div className="bg-[#141414] border border-white/10 p-5 rounded-sm">
-                  <h3 className="text-base sm:text-lg font-oswald font-bold uppercase text-white mb-1.5">
-                    Comfort &amp; Hygiene First
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body">
-                    Well-maintained changing areas, secure lockers, and a respectful atmosphere on the floor.
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <Link
-                  href="/contact?program=ladies-program"
-                  className="inline-flex items-center gap-2 bg-[#C8010A] hover:bg-white hover:text-black text-white font-oswald text-sm sm:text-base uppercase font-bold tracking-wider px-8 py-4 rounded-sm transition-colors shadow-md"
-                >
-                  <span>Enquire For Ladies Program</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* 7. GOOGLE REVIEWS & RATING                                   */}
+      {/* MEMBER REVIEWS                                                */}
       {/* ============================================================ */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0e0e0e] border-y border-white/10">
         <div className="max-w-7xl mx-auto">
@@ -854,133 +358,7 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 8. PRACTICAL FITNESS ARTICLES (With Interactive Modal)       */}
-      {/* ============================================================ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
-            <div>
-              <span className="eyebrow text-sm sm:text-base text-[#C8010A] font-bold block mb-1 tracking-widest">
-                GUIDES &amp; RESOURCES
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-                Practical Training <span className="text-[#C8010A]">Tips</span>
-              </h2>
-            </div>
-            <p className="text-sm sm:text-base text-gray-300 font-body">
-              Click any article to read the full guide.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                onClick={() => setSelectedBlog(post)}
-                className="bg-[#141414] border border-white/10 rounded-sm overflow-hidden group cursor-pointer hover:border-[#C8010A]/40 transition-colors flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-52 w-full overflow-hidden bg-black/40">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <span className="absolute top-3 left-3 bg-[#C8010A] text-white text-xs font-oswald font-bold uppercase px-2.5 py-1 rounded-sm">
-                      {post.category}
-                    </span>
-                  </div>
-                  <div className="p-6">
-                    <span className="text-xs sm:text-sm text-gray-400 font-body block mb-2">
-                      {post.readTime}
-                    </span>
-                    <h3 className="font-oswald font-bold uppercase text-xl text-white group-hover:text-[#C8010A] transition-colors leading-snug mb-2.5">
-                      {post.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-body line-clamp-2">
-                      {post.desc}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-6 pb-6 pt-2 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-sm font-oswald font-bold uppercase tracking-wider text-[#C8010A] flex items-center gap-1.5">
-                    <span>Read Guide</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Blog Reader Modal */}
-      {selectedBlog && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={selectedBlog.title}
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
-        >
-          <div className="bg-[#141414] border border-white/20 rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto relative">
-            <button
-              type="button"
-              onClick={() => setSelectedBlog(null)}
-              className="absolute top-3 right-3 z-20 w-9 h-9 bg-black/70 hover:bg-[#C8010A] text-white rounded-sm flex items-center justify-center transition-colors"
-              aria-label="Close article modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="relative h-60 w-full">
-              <Image
-                src={selectedBlog.image}
-                alt={selectedBlog.title}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-4">
-                <span className="bg-[#C8010A] text-white text-xs font-oswald font-bold uppercase px-2.5 py-1 rounded-sm mr-2.5">
-                  {selectedBlog.category}
-                </span>
-                <span className="text-sm text-gray-300 font-body">{selectedBlog.readTime}</span>
-              </div>
-            </div>
-
-            <div className="p-6 sm:p-8 space-y-5">
-              <h2 className="font-oswald text-2xl sm:text-3xl md:text-4xl font-bold uppercase text-white leading-tight">
-                {selectedBlog.title}
-              </h2>
-              <div className="space-y-3.5 text-base text-gray-200 leading-relaxed font-body">
-                {selectedBlog.content.map((p, idx) => (
-                  <p key={idx} className={p.match(/^[1-5]\./) ? "font-semibold text-white pt-1 text-lg" : ""}>
-                    {p}
-                  </p>
-                ))}
-              </div>
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                <p className="text-sm text-gray-400 font-body">
-                  Questions? Speak with a coach on the floor.
-                </p>
-                <Link
-                  href="/contact"
-                  onClick={() => setSelectedBlog(null)}
-                  className="bg-[#C8010A] hover:bg-white hover:text-black text-white font-oswald text-sm uppercase font-bold px-5 py-3 rounded-sm transition-colors"
-                >
-                  Visit Gym
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ============================================================ */}
-      {/* 9. BMI CALCULATOR — Clarified Framing & Non-Medical Metric   */}
+      {/* BMI CALCULATOR — retained as requested                        */}
       {/* ============================================================ */}
       <section id="bmi" className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0e0e0e] border-y border-white/10">
         <div className="max-w-5xl mx-auto">
@@ -1126,27 +504,7 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 10. MARQUEE STRIP — Verified Business Facts                  */}
-      {/* ============================================================ */}
-      <div className="bg-[#C8010A] py-3.5 text-white font-oswald font-bold uppercase text-sm sm:text-base tracking-wider marquee-container">
-        <div className="marquee-content flex gap-8 items-center">
-          <span>• OPEN 24/7 IN HATHIJAN CIRCLE</span>
-          <span>• 250+ ACTIVE MEMBERS</span>
-          <span>• 40+ STRENGTH &amp; CARDIO MACHINES</span>
-          <span>• CERTIFIED FLOOR COACHES</span>
-          <span>• DEMO SESSION AVAILABLE (₹500)</span>
-          <span>• AIR-CONDITIONED FACILITY</span>
-          <span>• OPEN 24/7 IN HATHIJAN CIRCLE</span>
-          <span>• 250+ ACTIVE MEMBERS</span>
-          <span>• 40+ STRENGTH &amp; CARDIO MACHINES</span>
-          <span>• CERTIFIED FLOOR COACHES</span>
-          <span>• DEMO SESSION AVAILABLE (₹500)</span>
-          <span>• AIR-CONDITIONED FACILITY</span>
-        </div>
-      </div>
-
-      {/* ============================================================ */}
-      {/* 11. ENQUIRY & VISIT SECTION                                  */}
+      {/* VISIT & ENQUIRY — primary conversion section                  */}
       {/* ============================================================ */}
       <section id="enquiry" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
