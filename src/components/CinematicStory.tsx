@@ -74,17 +74,18 @@ export default function CinematicStory() {
             </p>
             <h2
               id="story-heading"
-              className="max-w-xl font-oswald text-[clamp(3.5rem,7vw,7.4rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em] text-white"
+              className="max-w-xl font-oswald text-[clamp(3.25rem,5.8vw,6.6rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em] text-white"
             >
               MORE THAN
               <br />
-              <span className="text-[#C8010A]">A GYM.</span>
+              A GYM.
               <br />
-              A MINDSET.
+              IT&apos;S A
+              <br />
+              <span className="text-[#C8010A]">MOVEMENT.</span>
             </h2>
             <p className="mt-8 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
-              Not another ordinary workout. A space designed to help you show
-              up, find your rhythm and build a stronger version of yourself.
+              A place to show up, find your strength and keep moving forward — together.
             </p>
             <Link
               href="/#gallery"
