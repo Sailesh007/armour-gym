@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ButtonLink, Container, SectionTitle } from "./ui";
+import { ButtonLink, Container } from "./ui";
 
 // Prices mirror /pricing — keep the two in sync.
 const plans = [
@@ -15,11 +15,13 @@ export default function PlansPreview() {
     <section id="memberships" className="bg-[#e7e8e6] py-20 text-[#0a0a0a] md:py-28">
       <Container>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionTitle
-            tone="light"
-            title="Pick a pass and start any day"
-            lead="Every recurring pass includes 24/7 biometric access.*"
-          />
+          <div>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-[#C8010A]">YOUR JOURNEY. YOUR PLAN.</p>
+            <h2 className="font-oswald text-5xl font-bold uppercase leading-[0.94] tracking-tight text-[#0A0A0A] sm:text-6xl">
+              CHOOSE YOUR <span className="text-[#C8010A]">MEMBERSHIP.</span>
+            </h2>
+            <p className="mt-5 text-sm text-[#41454a] sm:text-base">Every recurring pass includes 24/7 biometric access.*</p>
+          </div>
           <ButtonLink href="/pricing" variant="outline-ink" arrow className="self-start md:self-auto">
             Compare all plans
           </ButtonLink>

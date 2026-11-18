@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
+import FooterHologram from "@/components/FooterHologram";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -25,7 +26,8 @@ export default function Footer() {
         aria-hidden="true"
         className="pointer-events-none absolute right-0 top-0 h-[500px] w-full bg-[radial-gradient(ellipse_at_80%_0%,rgba(200,1,10,0.13),transparent_55%)]"
       />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <FooterHologram />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Clear final action, without duplicating the homepage contact form. */}
         <div className="grid gap-10 border-b border-white/15 py-20 sm:py-24 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:gap-16 lg:py-28">
           <div>
@@ -85,10 +87,10 @@ export default function Footer() {
               href="https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6"
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-7 inline-flex max-w-sm items-start gap-3 text-sm leading-relaxed text-white/70 transition-colors hover:text-white"
+              className="group mt-7 inline-flex max-w-sm items-start gap-4 text-sm leading-relaxed text-white/80 transition-colors hover:text-white"
               aria-label="Find ARMOUR 24-7 Gym on Google Maps"
             >
-              <MapPin aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#FF858A]" />
+              <span className="flex size-10 shrink-0 items-center justify-center border border-[#FF858A]/55 bg-[#C8010A]/20 shadow-[0_0_20px_rgba(200,1,10,0.16)]"><MapPin aria-hidden="true" className="size-5 text-white" /></span>
               <span>
                 C-601, 602 Shalin Square, Hathijan Circle,
                 <br />
@@ -123,23 +125,23 @@ export default function Footer() {
             <div className="space-y-4 text-sm sm:text-base">
               <a
                 href="tel:+918160697163"
-                className="flex items-center gap-3 text-white/75 transition-colors hover:text-white"
+                className="flex items-center gap-4 text-white/85 transition-colors hover:text-white"
               >
-                <Phone aria-hidden="true" className="size-5 shrink-0 text-[#FF858A]" />
+                <span className="flex size-10 shrink-0 items-center justify-center border border-[#FF858A]/55 bg-[#C8010A]/20 shadow-[0_0_20px_rgba(200,1,10,0.16)]"><Phone aria-hidden="true" className="size-5 text-white" /></span>
                 +91 81606 97163
               </a>
               <a
                 href="mailto:armour247gym@gmail.com"
-                className="flex items-center gap-3 break-all text-white/75 transition-colors hover:text-white"
+                className="flex items-center gap-4 break-all text-white/85 transition-colors hover:text-white"
               >
-                <Mail aria-hidden="true" className="size-5 shrink-0 text-[#FF858A]" />
+                <span className="flex size-10 shrink-0 items-center justify-center border border-[#FF858A]/55 bg-[#C8010A]/20 shadow-[0_0_20px_rgba(200,1,10,0.16)]"><Mail aria-hidden="true" className="size-5 text-white" /></span>
                 armour247gym@gmail.com
               </a>
             </div>
 
             <div className="mt-8 border-t border-white/10 pt-6">
-              <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                <Clock3 aria-hidden="true" className="size-5 text-[#FF858A]" />
+              <div className="flex items-center gap-3 text-sm font-semibold text-white">
+                <span className="flex size-10 shrink-0 items-center justify-center border border-[#FF858A]/55 bg-[#C8010A]/20 shadow-[0_0_20px_rgba(200,1,10,0.16)]"><Clock3 aria-hidden="true" className="size-5 text-white" /></span>
                 MEMBER ACCESS: 24/7*
               </div>
               <p className="mt-2 text-sm text-white/55">

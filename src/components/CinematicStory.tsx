@@ -78,7 +78,7 @@ export default function CinematicStory() {
               <br />
               IT&apos;S A
               <br />
-              MOVEMENT.
+              <span className="text-[#C8010A]">MOVEMENT.</span>
             </h2>
             <p className="mt-8 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
               A place to show up, find your strength and keep moving forward — together.
@@ -105,13 +105,13 @@ export default function CinematicStory() {
           </div>
         </div>
 
-        <div className="space-y-9 sm:space-y-14">
+        <div className="space-y-10 sm:space-y-20">
           {moments.map((moment, index) => (
             <Reveal key={moment.number} delay={0.06} y={28}>
-              <article className="group overflow-hidden border border-white/10 bg-[#111317] transition-colors duration-500 hover:border-white/25">
+              <article className={`group overflow-hidden border border-white/10 bg-[#111317] transition-colors duration-500 hover:border-white/25 ${index === 1 ? "lg:-translate-x-8" : ""}`}>
                 <ParallaxFrame
-                  speed={index === 1 ? 8 : 12}
-                  className="relative h-[20rem] overflow-hidden sm:h-[30rem] lg:h-[34rem]"
+                  speed={[13, 19, 15][index]}
+                  className="relative h-[21rem] overflow-hidden sm:h-[31rem] lg:h-[37rem]"
                   overlay={
                     <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-gradient-to-t from-black/65 via-transparent to-black/30 p-6 sm:p-8">
                       <span className="border border-white/40 bg-black/40 px-3 py-2 font-body text-xs font-semibold text-white backdrop-blur-md">

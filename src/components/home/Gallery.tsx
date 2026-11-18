@@ -59,10 +59,10 @@ export default function Gallery() {
         />
 
         <div className="mt-12 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12">
-          {tiles.map((tile) => (
+          {tiles.map((tile, index) => (
             <ParallaxFrame
               key={tile.src}
-              speed={6}
+              speed={[9, 15, 12, 18, 11, 16][index]}
               className={`group relative h-80 overflow-hidden bg-[#151515] sm:h-96 lg:h-[30rem] ${tile.span}`}
               overlay={
                 <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/5 to-transparent p-5">
