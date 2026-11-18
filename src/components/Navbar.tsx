@@ -9,7 +9,6 @@ import { Menu, X, ArrowRight, Phone, MessageSquare } from "lucide-react";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Programs", href: "/#programs" },
-  { name: "Ladies Program", href: "/#ladies-program" },
   { name: "Facility", href: "/#gallery" },
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
@@ -17,9 +16,10 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const [mobileMenuState, setMobileMenuState] = useState({ open: false, pathname: "" });
+  const isMobileMenuOpen = mobileMenuState.open && mobileMenuState.pathname === pathname;
+  const [isScrolled, setIsScrolled] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -31,16 +31,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
   // Lock body scroll and handle Esc key when mobile menu is open
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
+        closeMenu();
         toggleButtonRef.current?.focus();
       }
     };
@@ -59,20 +54,19 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const toggleMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
+    setMobileMenuState((prev) => ({
+      open: !(prev.open && prev.pathname === pathname),
+      pathname,
+    }));
   };
 
   const closeMenu = () => {
-    setIsMobileMenuOpen(false);
+    setMobileMenuState({ open: false, pathname });
   };
 
   return (
     <>
-      {/* 
-        Header is permanently transparent across all scroll states.
-        A subtle linear gradient at the very top ensures high contrast and readability 
-        over the hero image and bright background areas without creating a solid strip.
-      */}
+      {/* Transparent over the homepage hero; an opaque surface appears while scrolling. */}
       <header
         id="mainHeader"
         className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,padding,backdrop-filter] duration-500 ${isScrolled || pathname !== "/" || isMobileMenuOpen ? "border-white/10 bg-[#08090B]/95 py-3 shadow-[0_12px_50px_rgba(0,0,0,0.25)] backdrop-blur-xl" : "border-transparent bg-gradient-to-b from-black/80 to-transparent py-4 sm:py-5"}`}
