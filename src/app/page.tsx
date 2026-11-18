@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LeadForm from "@/components/LeadForm";
@@ -44,14 +44,6 @@ const googleReviews = [
 
 export default function HomePage() {
   const [activeReview, setActiveReview] = useState(0);
-
-  // Auto-advance mobile reviews
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveReview((prev) => (prev + 1) % googleReviews.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   // BMI Calculator State
   const [bmiGender, setBmiGender] = useState<"male" | "female">("male");
@@ -186,23 +178,24 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {[
-              { src: "/images/dummy-gallery-1.webp", alt: "Main Gym Training Floor", caption: "Main Training Floor & Power Racks" },
-              { src: "/images/dummy-gallery-2.webp", alt: "Plate Loaded Machines and Leg Press", caption: "Plate-Loaded Strength Machines" },
-              { src: "/images/dummy-gallery-3.webp", alt: "Cardio Equipment and Treadmills", caption: "Cardio & Stamina Line" },
-              { src: "/images/dummy-gallery-4.webp", alt: "Dumbbells and Free Weight Racks", caption: "Heavy Dumbbells & Free Weights" },
-              { src: "/images/dummy-gallery-5.webp", alt: "Cable Rigs and Upper Body Stations", caption: "Dual-Cable Towers & Upper Body Rigs" },
-              { src: "/images/dummy-gallery-6.webp", alt: "Armour Gym Training Atmosphere", caption: "Air-Conditioned Workout Space" },
+              { src: "/images/dummy-gallery-1.webp", alt: "Main gym training floor", caption: "THE TRAINING FLOOR" },
+              { src: "/images/dummy-gallery-2.webp", alt: "Strength training machines", caption: "STRENGTH EQUIPMENT" },
+              { src: "/images/dummy-gallery-3.webp", alt: "Cardio training equipment", caption: "CARDIO ZONE" },
+              { src: "/images/dummy-gallery-4.webp", alt: "Dumbbells and free-weight racks", caption: "FREE WEIGHTS" },
             ].map((tile, i) => (
-              <Reveal key={tile.src} delay={(i % 3) * 0.1}>
-                {/* Photo drifts inside the frame at a different speed per column for depth */}
+              <Reveal
+                key={tile.src}
+                delay={(i % 2) * 0.09}
+                className={i === 0 || i === 3 ? "lg:col-span-2" : ""}
+              >
                 <ParallaxFrame
-                  speed={[8, 14, 8][i % 3]}
-                  className="relative h-64 sm:h-72 rounded-sm overflow-hidden group bg-black/40"
+                  speed={i % 2 === 0 ? 8 : 12}
+                  className="group relative h-72 overflow-hidden bg-black/40 sm:h-80 lg:h-[25rem]"
                   overlay={
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex items-end p-5">
-                      <span className="text-base sm:text-lg font-oswald uppercase tracking-wider text-white font-bold">
+                    <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/85 via-black/10 to-transparent p-6 sm:p-8">
+                      <span className="font-oswald text-xl font-bold uppercase tracking-wider text-white sm:text-2xl">
                         {tile.caption}
                       </span>
                     </div>
@@ -212,8 +205,8 @@ export default function HomePage() {
                     src={tile.src}
                     alt={tile.alt}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes={i === 0 || i === 3 ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 1024px) 100vw, 34vw"}
+                    className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
                   />
                 </ParallaxFrame>
               </Reveal>
