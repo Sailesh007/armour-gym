@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Clock3, Dumbbell, Users } from "lucide-react";
-import { ParallaxFrame, Reveal } from "@/components/Parallax";
+import { ArrowUpRight, Clock3, Dumbbell, Users } from "lucide-react";
+import { Reveal } from "@/components/Parallax";
 
 const benefits = [
   {
@@ -15,8 +15,8 @@ const benefits = [
   {
     Icon: Dumbbell,
     number: "02",
-    title: "SERIOUS EQUIPMENT",
-    detail: "A full floor for strength and cardio.",
+    title: "IMPORTED EQUIPMENT",
+    detail: "Premium imported machines for strength and cardio.",
   },
   {
     Icon: Users,
@@ -39,7 +39,10 @@ export function WhyArmour() {
               <p className="mb-3 font-oswald text-xs font-bold uppercase tracking-[0.25em] text-[#E33B42]">
                 THE ARMOUR ADVANTAGE
               </p>
-              <h2 id="why-armour-heading" className="font-oswald text-4xl font-bold uppercase leading-tight text-white sm:text-6xl">
+              <h2
+                id="why-armour-heading"
+                className="font-oswald text-4xl font-bold uppercase leading-tight text-white sm:text-6xl"
+              >
                 BUILT FOR <span className="text-[#C8010A]">YOUR PROGRESS.</span>
               </h2>
             </div>
@@ -67,89 +70,81 @@ export function WhyArmour() {
   );
 }
 
-export function LadiesSpotlight() {
-  return (
-    <section id="ladies-program" aria-labelledby="ladies-heading" className="bg-[#08090B] px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6">
-          <ParallaxFrame speed={9} className="relative h-[380px] overflow-hidden border border-white/10 sm:h-[520px]">
-            <Image
-              src="/images/dummy-gallery-5.webp"
-              alt="ARMOUR 24-7 Gym training facilities"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </ParallaxFrame>
-        </div>
-        <Reveal className="lg:col-span-6">
-          <p className="mb-5 font-oswald text-xs font-bold uppercase tracking-[0.25em] text-[#E33B42]">
-            FITNESS FOR EVERY WOMAN
-          </p>
-          <h2 id="ladies-heading" className="font-oswald text-5xl font-bold uppercase leading-[0.94] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            STRONGER <span className="text-[#C8010A]">TOGETHER.</span>
-          </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg">
-            A supportive space to build strength, confidence and consistency — at your pace.
-          </p>
-          <p className="mt-6 text-sm font-medium tracking-wide text-white/65">
-            Strength training <span className="mx-2 text-[#C8010A]">/</span> Cardio <span className="mx-2 text-[#C8010A]">/</span> Guided workouts
-          </p>
-          <Link
-            href="/contact?program=ladies-program"
-            className="group mt-9 inline-flex min-h-12 items-center gap-3 bg-[#C8010A] px-7 py-4 font-oswald text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black"
-          >
-            Ask about ladies training
-            <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 export function MembershipPreview() {
   return (
     <section
       id="memberships"
       aria-labelledby="memberships-heading"
-      className="relative isolate overflow-hidden border-y border-white/10 bg-[#141517] px-4 py-24 sm:px-6 sm:py-28 lg:px-8"
+      className="relative isolate overflow-hidden border-y border-white/10 bg-[#111214] px-4 py-24 sm:px-6 sm:py-32 lg:px-8"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-[#C8010A]/10 blur-3xl" />
-      <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-[#C8010A]/10 blur-3xl"
+      />
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
         <Reveal>
-          <p className="mb-4 font-oswald text-xs font-bold uppercase tracking-[0.25em] text-[#E33B42]">
-            MAKE IT YOUR ROUTINE
+          <p className="mb-5 font-oswald text-xs font-bold uppercase tracking-[0.25em] text-[#E33B42]">
+            MEMBERSHIP AT ARMOUR
           </p>
-          <h2 id="memberships-heading" className="font-oswald text-5xl font-bold uppercase leading-[0.94] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            YOUR JOURNEY. <span className="text-[#C8010A]">YOUR PLAN.</span>
+          <h2
+            id="memberships-heading"
+            className="max-w-2xl font-oswald text-[clamp(3.65rem,6.5vw,7rem)] font-bold uppercase leading-[0.91] tracking-[-0.035em] text-white"
+          >
+            YOUR JOURNEY.
+            <br />
+            <span className="text-[#C8010A]">YOUR PLAN.</span>
           </h2>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65">
-            Start with a month or commit for the long run. Explore the membership that fits your goals.
+          <p className="mt-7 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
+            Discover the membership that fits your lifestyle. The next step is yours.
           </p>
+          <Link
+            href="/pricing"
+            className="group mt-9 inline-flex min-h-12 items-center gap-3 border-b border-[#C8010A] pb-3 font-oswald text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:text-[#FF858A]"
+          >
+            View all membership plans
+            <ArrowUpRight
+              aria-hidden="true"
+              className="size-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+            />
+          </Link>
         </Reveal>
-        <Reveal delay={0.08}>
-          <div className="border border-white/15 bg-black/20 p-6 sm:p-8">
-            <p className="mb-6 font-oswald text-xs font-bold uppercase tracking-[0.2em] text-white/55">
-              MEMBERSHIP DURATIONS
-            </p>
-            <div className="grid grid-cols-4 gap-2 text-center">
-              {[1, 3, 6, 12].map((months) => (
-                <div key={months} className="border border-white/10 bg-white/[0.04] px-1 py-4">
-                  <span className="block font-oswald text-3xl font-bold text-white sm:text-4xl">{months}</span>
-                  <span className="mt-1 block text-[10px] uppercase tracking-wider text-white/50">
-                    {months === 1 ? "Month" : "Months"}
-                  </span>
-                </div>
-              ))}
+
+        <Reveal delay={0.1}>
+          <div className="group relative isolate flex min-h-[390px] flex-col justify-between overflow-hidden border border-white/15 bg-[#090A0B] p-6 sm:min-h-[465px] sm:p-10">
+            <Image
+              src="/images/img_7850.webp"
+              alt="Training space at ARMOUR 24-7 Gym"
+              fill
+              sizes="(max-width: 1024px) 100vw, 54vw"
+              className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-105"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-[#08090B]/95 via-[#08090B]/45 to-[#08090B]/55"
+            />
+            <div className="relative z-10 flex items-center justify-between gap-3">
+              <span className="font-oswald text-xs font-bold uppercase tracking-[0.24em] text-white/85">
+                ARMOUR 24-7
+              </span>
+              <span aria-hidden="true" className="h-px w-14 bg-[#C8010A]" />
             </div>
-            <Link
-              href="/pricing"
-              className="group mt-7 flex min-h-12 items-center justify-between bg-[#C8010A] px-5 py-4 font-oswald text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black"
-            >
-              View plans & pricing
-              <ArrowUpRight aria-hidden="true" className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </Link>
+            <div className="relative z-10 max-w-md">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF9DA1]">
+                OWN YOUR PROGRESS
+              </p>
+              <h3 className="font-oswald text-5xl font-bold uppercase leading-[0.92] tracking-[-0.025em] text-white sm:text-6xl">
+                START STRONG.
+                <br />
+                STAY CONSISTENT.
+              </h3>
+              <Link
+                href="/pricing"
+                className="mt-7 inline-flex min-h-12 items-center justify-between gap-5 bg-[#C8010A] px-5 py-3.5 font-oswald text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-black"
+              >
+                Explore Plans
+                <ArrowUpRight aria-hidden="true" className="size-5" />
+              </Link>
+            </div>
           </div>
         </Reveal>
       </div>
