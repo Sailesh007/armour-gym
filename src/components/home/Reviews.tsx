@@ -82,7 +82,7 @@ export default function Reviews() {
         </div>
         <p className="mt-5 flex items-start gap-2 text-xs leading-relaxed text-white/45">
           <Star aria-hidden="true" className="mt-0.5 size-3 shrink-0" />
-          Individual review quotations and ratings are available from Google Maps; no unverified testimonials are displayed here.
+          Read original member reviews and the latest ratings directly on Google Maps.
         </p>
       </Container>
     </section>
