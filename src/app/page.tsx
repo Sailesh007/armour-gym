@@ -3,12 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import LeadForm from "@/components/LeadForm";
 import CinematicStory from "@/components/CinematicStory";
 import ProgramShowcase from "@/components/ProgramShowcase";
-import { WhyArmour, LadiesSpotlight, MembershipPreview } from "@/components/HomeSections";
+import { WhyArmour, MembershipPreview } from "@/components/HomeSections";
 import { HeroParallax, ParallaxFrame, Reveal } from "@/components/Parallax";
-import { ArrowRight, Star, ChevronLeft, ChevronRight, Clock, MapPin, Info } from "lucide-react";
+import { ArrowRight, Star, ChevronLeft, ChevronRight, Info } from "lucide-react";
 
 // Real Google Reviews from Armour Gym's Google Maps listing
 const googleReviews = [
@@ -113,12 +112,6 @@ export default function HomePage() {
       >
         <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl">
-            <div className="mb-8 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#C8010A]" aria-hidden="true" />
-              <span className="font-oswald text-xs font-semibold uppercase tracking-[0.29em] text-white/80 sm:text-sm">
-                HATHIJAN, AHMEDABAD • ARMOUR 24-7
-              </span>
-            </div>
             <h1 className="font-oswald text-[clamp(4.25rem,10.8vw,11.5rem)] font-bold uppercase leading-[0.82] tracking-[-0.045em] text-white">
               BUILT
               <br />
@@ -129,7 +122,7 @@ export default function HomePage() {
             <div className="mt-10 flex flex-col gap-8 border-l-2 border-[#C8010A] pl-5 sm:mt-12 sm:flex-row sm:items-end sm:justify-between sm:gap-10 sm:pl-7">
               <p className="max-w-md text-base leading-relaxed text-white/80 sm:text-lg">
                 Discover a training space designed for progress.
-                Serious equipment. Strong community. Your journey starts here.
+                Imported equipment. Strong community. Your journey starts here.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -143,7 +136,7 @@ export default function HomePage() {
                   href="/contact"
                   className="inline-flex min-h-12 items-center justify-center border border-white/40 bg-black/20 px-6 py-4 font-oswald text-sm font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/15"
                 >
-                  Book a Visit
+                  Contact Our Team
                 </Link>
               </div>
             </div>
@@ -216,8 +209,6 @@ export default function HomePage() {
       </section>
 
       <WhyArmour />
-
-      <LadiesSpotlight />
 
       <MembershipPreview />
 
@@ -503,54 +494,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* VISIT & ENQUIRY — primary conversion section                  */}
-      {/* ============================================================ */}
-      <section id="enquiry" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-5 space-y-6">
-            <div>
-              <span className="eyebrow text-sm sm:text-base text-[#C8010A] font-bold block mb-1 tracking-widest">
-                HATHIJAN CIRCLE • AHMEDABAD
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-oswald font-bold uppercase text-white leading-tight">
-                Visit Armour <span className="text-[#C8010A]">24-7 Gym</span>
-              </h2>
-              <p className="text-base sm:text-lg text-gray-200 leading-relaxed mt-3 font-body">
-                Located at C-601, 602 Shalin Square, Hathijan Circle. Walk in to inspect the machines or submit an inquiry for membership plans.
-              </p>
-            </div>
-
-            <div className="bg-[#141414] border border-white/10 p-6 sm:p-7 rounded-sm space-y-4 text-sm sm:text-base text-gray-200 font-body">
-              <div className="flex items-start gap-3.5">
-                <MapPin className="w-5 h-5 text-[#C8010A] shrink-0 mt-0.5" />
-                <p>
-                  C-601, 602 Shalin Square, Hathijan Circle, Ahmedabad, Gujarat 382445
-                </p>
-              </div>
-              <div className="flex items-center gap-3.5">
-                <Clock className="w-5 h-5 text-[#C8010A] shrink-0" />
-                <p>Biometric Access: 24/7 • Front Desk: 06:00 AM – 10:00 PM</p>
-              </div>
-              <div className="pt-2 border-t border-white/10">
-                <a
-                  href="https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm sm:text-base text-[#C8010A] font-semibold hover:underline"
-                >
-                  <MapPin className="w-4 h-4" />
-                  <span>Open Directions on Google Maps ↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <LeadForm />
-          </div>
-        </div>
-      </section>
 
     </div>
   );
