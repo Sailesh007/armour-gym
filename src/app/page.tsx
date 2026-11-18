@@ -11,7 +11,7 @@ const structuredData = {
   description: "Fitness facility with strength training, imported equipment and 24/7 member access in Hathijan, Ahmedabad.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app",
   telephone: "+918160697163",
-  image: "/images/hero_armour.webp",
+  image: new URL("/images/hero_armour.webp", process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app").toString(),
   hasMap: "https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6",
   address: {
     "@type": "PostalAddress",
