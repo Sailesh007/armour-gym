@@ -6,6 +6,7 @@ import FooterHologram from "@/components/FooterHologram";
 const navigation = [
   { label: "Home", href: "/" },
   { label: "Training Programs", href: "/#programs" },
+  { label: "Studios & Terrace", href: "/#studios" },
   { label: "Our Facilities", href: "/#gallery" },
   { label: "About ARMOUR", href: "/about" },
   { label: "Membership Plans", href: "/pricing" },
