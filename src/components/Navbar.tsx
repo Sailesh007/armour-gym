@@ -9,7 +9,7 @@ import { Menu, X, ArrowRight, Phone, MessageSquare } from "lucide-react";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Programs", href: "/#programs" },
-  { name: "Facility", href: "/#gallery" },
+  { name: "Studios", href: "/#studios" },
   { name: "About", href: "/about" },
   { name: "Pricing", href: "/pricing" },
   { name: "Contact", href: "/contact" },

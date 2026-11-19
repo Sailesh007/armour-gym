@@ -68,7 +68,7 @@ export default async function AboutPage() {
           <div className="relative h-80 overflow-hidden sm:col-span-7 sm:h-[530px]">
             <Image
               src={images["about-hero"].src}
-              alt="Actual ARMOUR 24-7 Gym floor beneath the illuminated ARMOUR sign"
+              alt={images["about-hero"].src.startsWith("/images/dummy-") ? "Decorative gym image" : "ARMOUR 24-7 Gym floor beneath the illuminated ARMOUR sign"}
               fill
               priority
               sizes="(max-width: 640px) 100vw, 58vw"
@@ -79,7 +79,7 @@ export default async function AboutPage() {
           <div className="relative h-80 overflow-hidden sm:col-span-5 sm:h-[530px]">
             <Image
               src={images["about-side"].src}
-              alt="Training machines and free weights inside ARMOUR 24-7 Gym"
+              alt={images["about-side"].src.startsWith("/images/dummy-") ? "Decorative fitness equipment photo" : "Training machines and free weights inside ARMOUR 24-7 Gym"}
               fill
               sizes="(max-width: 640px) 100vw, 42vw"
               className="object-cover"
@@ -109,7 +109,7 @@ export default async function AboutPage() {
           <div className="relative h-[350px] overflow-hidden sm:h-[460px]">
             <Image
               src={images["about-bottom"].src}
-              alt="ARMOUR 24-7 dumbbell and cable machine area"
+              alt={images["about-bottom"].src.startsWith("/images/dummy-") ? "Decorative strength training image" : "ARMOUR 24-7 dumbbell and cable machine area"}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"

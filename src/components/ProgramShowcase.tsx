@@ -12,7 +12,7 @@ const programs = [
     title: "Strength",
     eyebrow: "Strength training",
     line: "Build your strength. Break your limits.",
-    image: "/images/img_7848.webp",
+    image: "/images/dummy-gallery-3.webp",
     alt: "ARMOUR 24-7 Gym power rack and lifting platform",
     speed: 10,
     focus: "center 56%",
@@ -23,7 +23,7 @@ const programs = [
     title: "Cardio",
     eyebrow: "Cardio training",
     line: "Find your pace. Go further.",
-    image: "/images/img_7851.webp",
+    image: "/images/dummy-gallery-4.webp",
     alt: "Wide view of ARMOUR training machines and fitness floor",
     speed: 15,
     focus: "center 65%",
@@ -34,7 +34,7 @@ const programs = [
     title: "Functional",
     eyebrow: "Functional fitness",
     line: "Move better. Perform stronger.",
-    image: "/images/img_7854.webp",
+    image: "/images/dummy-gallery-5.webp",
     alt: "Plate-loaded training equipment inside ARMOUR 24-7 Gym",
     speed: 12,
     focus: "center 54%",
@@ -45,7 +45,7 @@ const programs = [
     title: "Personal",
     eyebrow: "Personal training",
     line: "Focused support for your goals.",
-    image: "/images/img_7853.webp",
+    image: "/images/dummy-gallery-6.webp",
     alt: "Dumbbells and training stations at ARMOUR 24-7 Gym",
     speed: 17,
     focus: "center 68%",
@@ -91,7 +91,7 @@ export default function ProgramShowcase({ images }: { images: SiteImages }) {
               >
                 <Image
                   src={images[program.slot].src}
-                  alt={program.alt}
+                  alt={images[program.slot].src.startsWith("/images/dummy-") ? `Decorative training illustration for ${program.title}` : program.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-[filter] duration-700 group-hover:brightness-125"

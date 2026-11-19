@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "ARMOUR 24-7 GYM",
     title: "ARMOUR 24-7 GYM | Hathijan, Ahmedabad",
     description: "More than a gym. It's a movement. Discover imported equipment, training and 24/7 member access.",
-    images: ["/images/hero_armour.webp"],
+    images: ["/images/dummy-hero.webp"],
   },
   twitter: { card: "summary_large_image" },
   title: "Armour 24-7 Gym | Hathijan Circle, Ahmedabad",

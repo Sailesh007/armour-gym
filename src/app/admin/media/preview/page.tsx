@@ -9,6 +9,7 @@ import Hero from "@/components/home/Hero";
 import CinematicStory from "@/components/CinematicStory";
 import ProgramShowcase from "@/components/ProgramShowcase";
 import Gallery from "@/components/home/Gallery";
+import SpecialtyShowcase from "@/components/SpecialtyShowcase";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -61,6 +62,7 @@ export default async function MediaPreviewPage({
   else if (area === "Story") content = <CinematicStory images={previewImages} />;
   else if (area === "Programs") content = <ProgramShowcase images={previewImages} />;
   else if (area === "Gallery") content = <Gallery images={previewImages} />;
+  else if (area === "Studios") content = <SpecialtyShowcase images={previewImages} />;
   else {
     content = (
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

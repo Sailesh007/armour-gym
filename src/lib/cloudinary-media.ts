@@ -122,7 +122,7 @@ async function loadPublishedImages(): Promise<SiteImages> {
  */
 export const getPublishedImages = unstable_cache(
   loadPublishedImages,
-  ["armour-media-published-v1"],
+  ["armour-media-published-v2"],
   { revalidate: 300, tags: ["armour-media-live"] },
 );
 

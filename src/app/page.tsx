@@ -12,7 +12,7 @@ const structuredData = {
   description: "Fitness facility with strength training, imported equipment and 24/7 member access in Hathijan, Ahmedabad.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app",
   telephone: "+918160697163",
-  image: new URL("/images/hero_armour.webp", process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app").toString(),
+  image: new URL("/images/dummy-hero.webp", process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app").toString(),
   hasMap: "https://maps.app.goo.gl/fdHFDqTDaHNvw5Pf6",
   address: {
     "@type": "PostalAddress",
@@ -26,6 +26,7 @@ const structuredData = {
 
 import CinematicStory from "@/components/CinematicStory";
 import ProgramShowcase from "@/components/ProgramShowcase";
+import SpecialtyShowcase from "@/components/SpecialtyShowcase";
 import { WhyArmour } from "@/components/HomeSections";
 import Hero from "@/components/home/Hero";
 import Gallery from "@/components/home/Gallery";
@@ -46,12 +47,18 @@ export default async function HomePage() {
     <div className="bg-[#0a0a0a] text-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          ...structuredData,
+          image: images.hero.src.startsWith("https://")
+            ? images.hero.src
+            : new URL(images.hero.src, process.env.NEXT_PUBLIC_SITE_URL || "https://armour-gym-pi.vercel.app").toString(),
+        }) }}
       />
       <Hero images={images} />
       <WhyArmour />
       <CinematicStory images={images} />
       <ProgramShowcase images={images} />
+      <SpecialtyShowcase images={images} />
       <Gallery images={images} />
       <PlansPreview />
       <Reviews />

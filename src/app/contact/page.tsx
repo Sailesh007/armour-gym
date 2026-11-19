@@ -46,7 +46,7 @@ export default async function ContactPage({
             <div className="relative h-64 overflow-hidden bg-[#171717] sm:h-80">
               <Image
                 src={images["contact-photo"].src}
-                alt="Interior of ARMOUR 24-7 Gym with illuminated branding"
+                alt={images["contact-photo"].src.startsWith("/images/dummy-") ? "Decorative gym preview image" : "Interior of ARMOUR 24-7 Gym with illuminated branding"}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"

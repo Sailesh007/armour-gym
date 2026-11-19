@@ -14,7 +14,7 @@ type Inventory = {
   archive: CloudImage[];
 };
 
-const areas = ["Home", "Story", "Programs", "Gallery", "About", "Contact"] as const;
+const areas = ["Home", "Story", "Programs", "Studios", "Gallery", "About", "Contact"] as const;
 const liveId = (slot: MediaSlot) => "armour-media/live/" + slot;
 const draftPrefix = (slot: MediaSlot) => "armour-media/drafts/" + slot + "-";
 const archivePrefix = (slot: MediaSlot) => "armour-media/history/" + slot + "/";
@@ -301,10 +301,10 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
                   </p>
                 </div>
               )}
-              {slot.startsWith("program-") && (
+              {(slot.startsWith("program-") || slot.startsWith("special-")) && (
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-6">
                   <p className="font-oswald text-3xl font-bold uppercase text-white">
-                    {slot.replace("program-", "")}
+                    {slot.replace("program-", "").replace("special-", "")}
                   </p>
                 </div>
               )}

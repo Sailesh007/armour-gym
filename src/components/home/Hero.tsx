@@ -27,7 +27,7 @@ export default function Hero({ images }: { images: SiteImages }) {
         <>
           <Image
             src={images.hero.src}
-            alt="ARMOUR 24-7 Gym training floor, Hathijan, Ahmedabad"
+            alt={images.hero.src.startsWith("/images/dummy-") ? "Decorative gym preview image" : "ARMOUR 24-7 Gym training floor, Hathijan, Ahmedabad"}
             fill
             priority
             sizes="100vw"
