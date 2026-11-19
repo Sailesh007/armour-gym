@@ -91,13 +91,29 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
     setError("");
     setMessage("");
     try {
-      const form = new FormData();
-      form.append("slot", slot);
-      form.append("image", file);
-      const response = await fetch("/api/admin/media/upload", { method: "POST", body: form });
-      const result = await response.json() as { image?: CloudImage; error?: string };
-      if (!response.ok || !result.image) throw new Error(result.error ?? "Upload failed");
-      chooseImage(result.image);
+      // Request a single-use-style signed destination, then upload file bytes
+      // directly to Cloudinary (Vercel never handles the large image body).
+      const signatureResponse = await fetch("/api/admin/media/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slot }),
+      });
+      const signed = await signatureResponse.json() as {
+        url?: string;
+        fields?: Record<string, string>;
+        error?: string;
+      };
+      if (!signatureResponse.ok || !signed.url || !signed.fields) {
+        throw new Error(signed.error ?? "Could not authorize upload");
+      }
+      const uploadForm = new FormData();
+      Object.entries(signed.fields).forEach(([key, value]) => uploadForm.append(key, value));
+      uploadForm.append("file", file, file.name);
+      const response = await fetch(signed.url, { method: "POST", body: uploadForm });
+      if (!response.ok) throw new Error("Cloudinary rejected the image. Check file type and account limits.");
+      const result = await response.json() as CloudImage;
+      if (!result.public_id || !result.secure_url) throw new Error("Cloudinary did not return a valid image.");
+      chooseImage(result);
       setMessage("Draft uploaded. Adjust image focus, then publish when ready.");
       await refresh();
     } catch (err: unknown) {
