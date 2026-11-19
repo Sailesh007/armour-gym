@@ -91,7 +91,7 @@ export default function ProgramShowcase({ images }: { images: SiteImages }) {
               >
                 <Image
                   src={images[program.slot].src}
-                  alt={program.alt}
+                  alt={images[program.slot].src.startsWith("/images/dummy-") ? `Decorative training illustration for ${program.title}` : program.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-[filter] duration-700 group-hover:brightness-125"
