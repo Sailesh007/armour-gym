@@ -1,5 +1,6 @@
 import "server-only";
 import { createHash, randomUUID } from "node:crypto";
+import { unstable_cache } from "next/cache";
 import { mediaSlots, slotIds, type MediaSlot, type SiteImages, fallbackImages } from "./media-slots";
 
 const ROOT = "armour-media";
@@ -94,7 +95,7 @@ async function listPrefix(prefix: string, limit = 100): Promise<CloudImage[]> {
   return result?.resources ?? [];
 }
 
-export async function getPublishedImages(): Promise<SiteImages> {
+async function loadPublishedImages(): Promise<SiteImages> {
   const images = fallbackImages();
   if (!cloudConfig()) return images;
   try {
@@ -114,6 +115,16 @@ export async function getPublishedImages(): Promise<SiteImages> {
   }
   return images;
 }
+
+/**
+ * Avoid consuming the Cloudinary Admin API quota on every public page visit.
+ * Publish invalidates this cache explicitly; fallback revalidation is 5 minutes.
+ */
+export const getPublishedImages = unstable_cache(
+  loadPublishedImages,
+  ["armour-media-published-v1"],
+  { revalidate: 300, tags: ["armour-media-live"] },
+);
 
 export function parseFocus(value: unknown): string {
   if (typeof value !== "string" || !/^\d{1,3}% \d{1,3}%$/.test(value)) return "50% 50%";
