@@ -53,7 +53,31 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
     }
   }, [configured, router]);
 
-  useEffect(() => { if (configured) void refresh(); }, [configured, refresh]);
+  useEffect(() => {
+    if (!configured) return;
+    const controller = new AbortController();
+    // Fetch asynchronously; React state updates happen in the network callback,
+    // not synchronously in the effect body.
+    fetch("/api/admin/media", { cache: "no-store", signal: controller.signal })
+      .then(async (response) => {
+        if (response.status === 401) {
+          router.replace("/admin/login");
+          return;
+        }
+        const data = await response.json() as Inventory & { error?: string };
+        if (!response.ok) throw new Error(data.error ?? "Unable to load media.");
+        setInventory(data);
+      })
+      .catch((err: unknown) => {
+        if (!controller.signal.aborted) {
+          setError(err instanceof Error ? err.message : "Could not load media");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
+  }, [configured, router]);
 
   const visibleSlots = useMemo(() => slotIds.filter((id) => mediaSlots[id].area === area), [area]);
   const published = inventory.published.find((image) => image.public_id === liveId(slot));
