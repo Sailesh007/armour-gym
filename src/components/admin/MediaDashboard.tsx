@@ -33,12 +33,12 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
   const [x, setX] = useState(50);
   const [y, setY] = useState(50);
   const [busy, setBusy] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(configured);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const refresh = useCallback(async () => {
-    if (!configured) { setLoading(false); return; }
+    if (!configured) return;
     try {
       const res = await fetch("/api/admin/media", { cache: "no-store" });
       if (res.status === 401) { router.replace("/admin/login"); return; }
@@ -53,7 +53,7 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
     }
   }, [configured, router]);
 
-  useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => { if (configured) void refresh(); }, [configured, refresh]);
 
   const visibleSlots = useMemo(() => slotIds.filter((id) => mediaSlots[id].area === area), [area]);
   const published = inventory.published.find((image) => image.public_id === liveId(slot));
