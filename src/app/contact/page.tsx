@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock3, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
+import { getPublishedImages } from "@/lib/cloudinary-media";
 
 export const metadata = {
   title: "Contact & Location | ARMOUR 24-7 Gym Ahmedabad",
@@ -9,12 +10,14 @@ export const metadata = {
   alternates: { canonical: "/contact" },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ContactPage({
   searchParams,
 }: {
   searchParams: Promise<{ plan?: string | string[]; program?: string | string[] }>;
 }) {
-  const params = await searchParams;
+  const [params, images] = await Promise.all([searchParams, getPublishedImages()]);
   const initialPlan = typeof params.plan === "string" ? params.plan : undefined;
 
   return (
@@ -42,11 +45,12 @@ export default async function ContactPage({
           <div className="space-y-10 lg:col-span-5">
             <div className="relative h-64 overflow-hidden bg-[#171717] sm:h-80">
               <Image
-                src="/images/img_7843.webp"
+                src={images["contact-photo"].src}
                 alt="Interior of ARMOUR 24-7 Gym with illuminated branding"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
+                style={{ objectPosition: images["contact-photo"].position }}
               />
             </div>
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getPublishedImages } from "@/lib/cloudinary-media";
 import { ArrowUpRight, Clock3, Dumbbell, MapPin, Users } from "lucide-react";
 
 export const metadata = {
@@ -27,7 +28,10 @@ const strengths = [
   },
 ] as const;
 
-export default function AboutPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AboutPage() {
+  const images = await getPublishedImages();
   return (
     <div className="min-h-screen bg-[#090A0C] pb-20 pt-28 text-white sm:pt-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -63,21 +67,23 @@ export default function AboutPage() {
         <div className="grid gap-3 py-8 sm:grid-cols-12 sm:gap-4 sm:py-12">
           <div className="relative h-80 overflow-hidden sm:col-span-7 sm:h-[530px]">
             <Image
-              src="/images/img_7843.webp"
+              src={images["about-hero"].src}
               alt="Actual ARMOUR 24-7 Gym floor beneath the illuminated ARMOUR sign"
               fill
               priority
               sizes="(max-width: 640px) 100vw, 58vw"
               className="object-cover"
+              style={{ objectPosition: images["about-hero"].position }}
             />
           </div>
           <div className="relative h-80 overflow-hidden sm:col-span-5 sm:h-[530px]">
             <Image
-              src="/images/img_7851.webp"
+              src={images["about-side"].src}
               alt="Training machines and free weights inside ARMOUR 24-7 Gym"
               fill
               sizes="(max-width: 640px) 100vw, 42vw"
               className="object-cover"
+              style={{ objectPosition: images["about-side"].position }}
             />
           </div>
         </div>
@@ -102,11 +108,12 @@ export default function AboutPage() {
         <section className="grid items-center gap-10 border-y border-white/10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
           <div className="relative h-[350px] overflow-hidden sm:h-[460px]">
             <Image
-              src="/images/img_7853.webp"
+              src={images["about-bottom"].src}
               alt="ARMOUR 24-7 dumbbell and cable machine area"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
+              style={{ objectPosition: images["about-bottom"].position }}
             />
           </div>
           <div>

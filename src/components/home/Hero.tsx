@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Clock3 } from "lucide-react";
 import { HeroParallax } from "@/components/Parallax";
 import { ButtonLink } from "./ui";
+import type { SiteImages } from "@/lib/media-slots";
 
 const sequence = {
   hidden: {},
@@ -15,7 +16,7 @@ const rise = {
   show: { opacity: 1, y: 0, transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-export default function Hero() {
+export default function Hero({ images }: { images: SiteImages }) {
   const reduce = useReducedMotion();
 
   return (
@@ -25,12 +26,13 @@ export default function Hero() {
       background={
         <>
           <Image
-            src="/images/hero_armour.webp"
+            src={images.hero.src}
             alt="ARMOUR 24-7 Gym training floor, Hathijan, Ahmedabad"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover"
+            style={{ objectPosition: images.hero.position }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#060608]/95 via-[#08090B]/70 to-[#08090B]/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#08090B] via-transparent to-[#08090B]/35" />

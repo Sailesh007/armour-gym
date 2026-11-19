@@ -3,10 +3,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ParallaxFrame } from "@/components/Parallax";
 import { Container } from "@/components/home/ui";
+import type { SiteImages } from "@/lib/media-slots";
 
 const programs = [
   {
     index: "01",
+    slot: "program-strength",
     title: "Strength",
     eyebrow: "Strength training",
     line: "Build your strength. Break your limits.",
@@ -17,6 +19,7 @@ const programs = [
   },
   {
     index: "02",
+    slot: "program-cardio",
     title: "Cardio",
     eyebrow: "Cardio training",
     line: "Find your pace. Go further.",
@@ -27,6 +30,7 @@ const programs = [
   },
   {
     index: "03",
+    slot: "program-functional",
     title: "Functional",
     eyebrow: "Functional fitness",
     line: "Move better. Perform stronger.",
@@ -37,6 +41,7 @@ const programs = [
   },
   {
     index: "04",
+    slot: "program-personal",
     title: "Personal",
     eyebrow: "Personal training",
     line: "Focused support for your goals.",
@@ -51,7 +56,7 @@ const programs = [
  * Image-first training showcase built entirely from photos of the real gym.
  * Images show training facilities, not staged or invented workout sessions.
  */
-export default function ProgramShowcase() {
+export default function ProgramShowcase({ images }: { images: SiteImages }) {
   return (
     <section id="programs" aria-labelledby="programs-heading" className="relative overflow-hidden bg-[#090A0D] py-24 sm:py-32">
       <Container>
@@ -85,12 +90,12 @@ export default function ProgramShowcase() {
                 }
               >
                 <Image
-                  src={program.image}
+                  src={images[program.slot].src}
                   alt={program.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-[filter] duration-700 group-hover:brightness-125"
-                  style={{ objectPosition: program.focus }}
+                  style={{ objectPosition: images[program.slot].src === program.image ? program.focus : images[program.slot].position }}
                 />
               </ParallaxFrame>
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 p-6 sm:p-7">

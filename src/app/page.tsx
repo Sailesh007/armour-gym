@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getPublishedImages } from "@/lib/cloudinary-media";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -37,18 +38,21 @@ import MobileActionBar from "@/components/home/MobileActionBar";
 // BMI inputs, mobile action bar) are client components.
 //
 // Rhythm: dark hero, light facts, dark story/programs/gallery, light plans, dark the rest.
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const images = await getPublishedImages();
   return (
     <div className="bg-[#0a0a0a] text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <Hero />
+      <Hero images={images} />
       <WhyArmour />
-      <CinematicStory />
-      <ProgramShowcase />
-      <Gallery />
+      <CinematicStory images={images} />
+      <ProgramShowcase images={images} />
+      <Gallery images={images} />
       <PlansPreview />
       <Reviews />
       <Bmi />

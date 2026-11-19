@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { ParallaxFrame } from "@/components/Parallax";
 import { Container, SectionTitle } from "./ui";
+import type { SiteImages } from "@/lib/media-slots";
 
 // Real photos of the Hathijan Circle floor. Widths vary per row so the grid has a rhythm;
 // `focus` keeps the subject (sign, racks, machines) in frame when a portrait photo is cropped wide.
 const tiles = [
   {
+    slot: "gallery-1",
     src: "/images/img_7843.webp",
     alt: "Main training floor under the illuminated ARMOUR sign",
     caption: "Main floor under the ARMOUR sign",
@@ -13,6 +15,7 @@ const tiles = [
     focus: "center 62%",
   },
   {
+    slot: "gallery-2",
     src: "/images/img_7848.webp",
     alt: "Power rack and lifting platform with wall murals",
     caption: "Power rack and lifting platform",
@@ -20,6 +23,7 @@ const tiles = [
     focus: "center 60%",
   },
   {
+    slot: "gallery-3",
     src: "/images/img_7853.webp",
     alt: "Rubber dumbbell racks in front of the cable machines",
     caption: "Dumbbell racks",
@@ -27,6 +31,7 @@ const tiles = [
     focus: "center 70%",
   },
   {
+    slot: "gallery-4",
     src: "/images/img_7854.webp",
     alt: "Plate-loaded machine in front of the Train In The Dark wall",
     caption: "Plate-loaded machines",
@@ -34,6 +39,7 @@ const tiles = [
     focus: "center 55%",
   },
   {
+    slot: "gallery-5",
     src: "/images/img_7845.webp",
     alt: "Bench press station and plate-loaded machines on the main floor",
     caption: "Bench and press stations",
@@ -41,6 +47,7 @@ const tiles = [
     focus: "center 58%",
   },
   {
+    slot: "gallery-6",
     src: "/images/img_7851.webp",
     alt: "Wide view of the machines and dumbbell area from the entrance",
     caption: "Machines and free weights",
@@ -49,7 +56,7 @@ const tiles = [
   },
 ];
 
-export default function Gallery() {
+export default function Gallery({ images }: { images: SiteImages }) {
   return (
     <section id="gallery" className="bg-[#0e0e0e] py-20 md:py-28">
       <Container>
@@ -61,7 +68,7 @@ export default function Gallery() {
         <div className="mt-12 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12">
           {tiles.map((tile, index) => (
             <ParallaxFrame
-              key={tile.src}
+              key={tile.slot}
               speed={[9, 15, 12, 18, 11, 16][index]}
               className={`group relative h-80 overflow-hidden bg-[#151515] sm:h-96 lg:h-[30rem] ${tile.span}`}
               overlay={
@@ -73,12 +80,12 @@ export default function Gallery() {
               }
             >
               <Image
-                src={tile.src}
+                src={images[tile.slot as keyof SiteImages].src}
                 alt={tile.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
-                style={{ objectPosition: tile.focus }}
+                style={{ objectPosition: images[tile.slot as keyof SiteImages].src === tile.src ? tile.focus : images[tile.slot as keyof SiteImages].position }}
               />
             </ParallaxFrame>
           ))}
