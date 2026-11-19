@@ -30,7 +30,7 @@ The script accepts a password without echoing it to your terminal. Paste only th
 
 1. Visit `/admin/login` and log in.
 2. Choose Home, Story, Programs, Gallery, About or Contact.
-3. Pick an individual section image.
+3. Pick an individual section image (including **Studios**: Yoga, Zumba, HYROX, Open Terrace).
 4. Upload original high-quality JPG, PNG or WebP up to 10 MB.
 5. Select the draft thumbnail and adjust horizontal/vertical focal position.
 6. Open **Preview on website** to see the draft inside the actual Hero, Story, Programs or Gallery layout before publishing (About/Contact use a representative section preview).
@@ -76,3 +76,20 @@ Photos originally included in the website are always available as fallbacks if a
 | About/Contact | 1600 px+ on the long edge |
 
 Use original camera files. Avoid WhatsApp compressed uploads and very small photographs. Cropping changes only the visible framing; it does not upscale the underlying image.
+
+## Beyond the Gym Floor showcase
+
+A cinematic, 4-card homepage section after Choose Your Grind:
+- Zumba Studio — large feature card
+- Yoga Studio — supporting card
+- HYROX Training — supporting card
+- Open Terrace Workout — large feature card
+
+Each card uses independently animated image parallax via Framer Motion with reduced-motion support. The Studio tab offers four new editable Media Manager IDs:
+`special-zumba`, `special-yoga`, `special-hyrox`, `special-terrace`.
+
+Before publishing your original HD photos, the cards show lightweight dummy images already in `public/images/`. The original local gym photos have been removed from the repository's **current tree**; the official ARMOUR logo and all previously uploaded Cloudinary assets remain intact. Existing Cloudinary `armour-media/live/` IDs were not changed.
+
+**Important:** Git history still contains previously committed image bytes. A normal deletion does not erase them from past commits. Permanently purging Git history requires a separate carefully planned repository rewrite.
+
+Updated existing Media Manager fallback slots point to dummy images, not deleted files. A Cloudinary-published image always takes precedence over its local fallback. The original image restore button now restores the dummy fallback.
