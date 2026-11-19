@@ -142,13 +142,24 @@ export async function getMediaInventory() {
   return { published, drafts, archive };
 }
 
-export async function uploadDraft(slot: MediaSlot, file: File): Promise<CloudImage> {
-  const id = DRAFT + slot + "-" + randomUUID().replace(/-/g, "");
-  return signedPost<CloudImage>("image/upload", {
-    public_id: id,
+/**
+ * A short-lived signature scoped to one unique draft public ID. The browser
+ * uploads directly to Cloudinary, avoiding Vercel's request body size limit.
+ */
+export function signDraftUpload(slot: MediaSlot) {
+  const c = cloudConfig();
+  if (!c) throw new Error("Cloudinary credentials missing");
+  const params = {
+    public_id: DRAFT + slot + "-" + randomUUID().replace(/-/g, ""),
     overwrite: "false",
     unique_filename: "false",
-  }, file);
+    allowed_formats: "jpg,png,webp",
+    timestamp: String(Math.floor(Date.now() / 1000)),
+  };
+  return {
+    url: endpoint("image/upload"),
+    fields: { ...params, api_key: c.key, signature: signedParams(params) },
+  };
 }
 
 const ownSlotAsset = (slot: MediaSlot, id: string) =>
