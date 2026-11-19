@@ -35,6 +35,7 @@ The script accepts a password without echoing it to your terminal. Paste only th
 5. Select the draft thumbnail and adjust horizontal/vertical focal position.
 6. Choose **Publish this image**. The existing published Cloudinary photo is moved into a versioned history path.
 7. Select a history photo and choose **Restore and publish this version** to roll back.
+8. Use **Use original photo** to revert entirely to the website's built-in photo, without losing the Cloudinary version.
 
 The original logo `/armour-logo.png` is **not in the editable slots**.
 
@@ -44,6 +45,7 @@ Photos originally included in the website are always available as fallbacks if a
 
 - Published images use fixed Cloudinary public IDs (`armour-media/live/<slot>`).
 - Draft uploads use unique IDs and do not appear publicly until published.
+- Upload is a short-lived **signed browser-to-Cloudinary request**. The Cloudinary API secret remains server-only; original photo bytes never pass through Vercel functions.
 - Replaced assets are renamed under `armour-media/history/<slot>/...`; those versions can be restored.
 - CSS focal point is persisted in Cloudinary image context.
 - Versioned delivery URLs allow the Next.js image optimizer to see new content.
