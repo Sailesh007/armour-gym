@@ -6,10 +6,12 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { ParallaxFrame, Reveal } from "@/components/Parallax";
+import type { SiteImages } from "@/lib/media-slots";
 
 const moments = [
   {
     number: "01",
+    slot: "story-space",
     label: "The space",
     title: "Built to move differently.",
     description:
@@ -19,6 +21,7 @@ const moments = [
   },
   {
     number: "02",
+    slot: "story-equipment",
     label: "The equipment",
     title: "Every rep matters.",
     description:
@@ -28,6 +31,7 @@ const moments = [
   },
   {
     number: "03",
+    slot: "story-routine",
     label: "Your routine",
     title: "Your goals. Your hours.",
     description:
@@ -42,7 +46,7 @@ const moments = [
  * The left narrative remains in view on large screens while the actual
  * gym imagery moves at a different scroll rate inside its frame.
  */
-export default function CinematicStory() {
+export default function CinematicStory({ images }: { images: SiteImages }) {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -121,12 +125,12 @@ export default function CinematicStory() {
                   }
                 >
                   <Image
-                    src={moment.image}
+                    src={images[moment.slot].src}
                     alt={`ARMOUR 24-7 Gym – ${moment.label.toLowerCase()}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 54vw"
                     className="object-cover transition-[filter] duration-700 group-hover:brightness-110"
-                    style={{ objectPosition: moment.position }}
+                    style={{ objectPosition: images[moment.slot].src === moment.image ? moment.position : images[moment.slot].position }}
                   />
                 </ParallaxFrame>
                 <div className="grid gap-3 p-6 sm:p-8">
