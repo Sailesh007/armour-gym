@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight, CheckCircle2, CloudUpload, History, ImagePlus, LogOut, RefreshCw, ShieldCheck } from "lucide-react";
 import { mediaSlots, slotIds, type MediaSlot } from "@/lib/media-slots";
@@ -332,13 +333,28 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
                       className="mt-3 w-full accent-[#C8010A]" />
                   </label>
                 </div>
-                <button
-                  type="button" onClick={() => void publish()} disabled={busy}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-3 bg-[#C8010A] px-6 py-3 font-oswald text-sm font-bold uppercase tracking-wider text-white disabled:opacity-40 sm:w-auto"
-                >
-                  <CheckCircle2 className="size-5" aria-hidden="true" />
-                  {busy ? "Processing…" : isRestore ? "Restore and publish this version" : "Publish this image"}
-                </button>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link
+                    href={"/admin/media/preview?" + new URLSearchParams({
+                      slot,
+                      asset: selection ?? "",
+                      x: String(x),
+                      y: String(y),
+                    }).toString()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/30 px-5 py-3 font-oswald text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    Preview on website <ArrowUpRight aria-hidden="true" className="size-4" />
+                  </Link>
+                  <button
+                    type="button" onClick={() => void publish()} disabled={busy}
+                    className="inline-flex min-h-12 items-center justify-center gap-3 bg-[#C8010A] px-6 py-3 font-oswald text-sm font-bold uppercase tracking-wider text-white disabled:opacity-40"
+                  >
+                    <CheckCircle2 className="size-5" aria-hidden="true" />
+                    {busy ? "Processing…" : isRestore ? "Restore and publish this version" : "Publish this image"}
+                  </button>
+                </div>
                 <p className="text-xs leading-relaxed text-white/50">The old published image is preserved in version history when you publish a replacement.</p>
               </div>
             ) : (
