@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isMediaAdminRequest, sameOrigin } from "@/lib/media-auth";
 import { publishImage } from "@/lib/cloudinary-media";
 import { isMediaSlot } from "@/lib/media-slots";
@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
   }
   try {
     const image = await publishImage(slot, sourceId, position);
+    revalidateTag("armour-media-live", { expire: 0 });
     revalidatePath("/");
     revalidatePath("/about");
     revalidatePath("/contact");
