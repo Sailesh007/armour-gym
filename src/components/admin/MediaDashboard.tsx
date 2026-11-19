@@ -312,6 +312,14 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
             {picked ? (
               <div className="mt-6 space-y-4">
                 <p className="text-sm font-medium text-white">Image crop / focal position</p>
+                <p className="text-xs text-white/60">
+                  Photo resolution: {picked.width} × {picked.height} px
+                  {(mediaSlots[slot].aspect === "wide" && (picked.width < 1800 || picked.height < 900)) ||
+                  (mediaSlots[slot].aspect === "portrait" && (picked.width < 1000 || picked.height < 1200)) ||
+                  (mediaSlots[slot].aspect === "landscape" && (picked.width < 1200 || picked.height < 750))
+                    ? " — Low resolution for this section; a sharper original photo is recommended."
+                    : " — Resolution is suitable for this section."}
+                </p>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="text-xs text-white/70">
                     Horizontal focus: {x}%
