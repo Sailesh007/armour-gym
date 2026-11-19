@@ -171,6 +171,30 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
     }
   }
 
+  async function restoreOriginal() {
+    if (!published || busy) return;
+    if (!window.confirm("Restore the original website photo? The current Cloudinary photo will remain in Version History.")) return;
+    setBusy(true);
+    setError("");
+    setMessage("");
+    try {
+      const response = await fetch("/api/admin/media/reset", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slot }),
+      });
+      const result = await response.json() as { ok?: boolean; error?: string };
+      if (!response.ok || !result.ok) throw new Error(result.error ?? "Reset failed");
+      setSelection(null);
+      setMessage("Original website image restored. Your previous photo is saved in history.");
+      await refresh();
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "Unable to restore original image");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function logout() {
     await fetch("/api/admin/media/logout", { method: "POST" });
     router.replace("/admin/login");
@@ -312,9 +336,21 @@ export default function MediaDashboard({ configured }: { configured: boolean }) 
             ) : (
               <div className="mt-5 flex items-center justify-between gap-4 text-xs text-white/50">
                 <span>{published ? `Cloudinary • ${published.width} × ${published.height} px` : "Original site image • Not yet replaced"}</span>
-                <a href="/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#FF969B] hover:text-white">
-                  Open website <ArrowUpRight className="size-4" />
-                </a>
+                <div className="flex flex-wrap items-center gap-3">
+                  {published && (
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void restoreOriginal()}
+                      className="border-b border-white/30 pb-1 text-xs text-white/70 transition-colors hover:border-[#FF858A] hover:text-white disabled:opacity-40"
+                    >
+                      Use original photo
+                    </button>
+                  )}
+                  <a href="/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#FF969B] hover:text-white">
+                    Open website <ArrowUpRight className="size-4" />
+                  </a>
+                </div>
               </div>
             )}
           </div>
