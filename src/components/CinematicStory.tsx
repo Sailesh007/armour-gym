@@ -16,7 +16,7 @@ const moments = [
     title: "Built to move differently.",
     description:
       "A purposeful training environment with room to focus, push and progress at your own pace.",
-    image: "/images/img_7842.webp",
+    image: "/images/dummy-break.webp",
     position: "center",
   },
   {
@@ -26,7 +26,7 @@ const moments = [
     title: "Every rep matters.",
     description:
       "From free weights to dedicated strength stations, find your next challenge on the gym floor.",
-    image: "/images/img_7844.webp",
+    image: "/images/dummy-gallery-1.webp",
     position: "center",
   },
   {
@@ -36,7 +36,7 @@ const moments = [
     title: "Your goals. Your hours.",
     description:
       "Make training part of your life with the flexibility and energy of ARMOUR 24-7.",
-    image: "/images/img_7849.webp",
+    image: "/images/dummy-gallery-2.webp",
     position: "center",
   },
 ] as const;
