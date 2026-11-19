@@ -81,7 +81,7 @@ export default function Gallery({ images }: { images: SiteImages }) {
             >
               <Image
                 src={images[tile.slot as keyof SiteImages].src}
-                alt={tile.alt}
+                alt={images[tile.slot as keyof SiteImages].src.startsWith("/images/dummy-") ? `Decorative gym image for ${tile.caption}` : tile.alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover transition-transform duration-700 motion-safe:group-hover:scale-105"
