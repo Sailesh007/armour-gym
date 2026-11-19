@@ -210,4 +210,16 @@ export async function publishImage(slot: MediaSlot, sourceId: string, position: 
   }
 }
 
+/**
+ * Revert to the original bundled site image. The Cloudinary photo is archived
+ * and can be republished later from history.
+ */
+export async function resetImageSlot(slot: MediaSlot): Promise<boolean> {
+  const liveId = LIVE + slot;
+  const current = await getCloudImage(liveId);
+  if (!current) return false;
+  await rename(liveId, HISTORY + slot + "/" + randomUUID().replace(/-/g, ""));
+  return true;
+}
+
 export const mediaSlotList = slotIds;
