@@ -8,7 +8,7 @@ import type { SiteImages } from "@/lib/media-slots";
 const tiles = [
   {
     slot: "gallery-1",
-    src: "/images/img_7843.webp",
+    src: "/images/dummy-gallery-1.webp",
     alt: "Main training floor under the illuminated ARMOUR sign",
     caption: "Main floor under the ARMOUR sign",
     span: "lg:col-span-5",
@@ -16,7 +16,7 @@ const tiles = [
   },
   {
     slot: "gallery-2",
-    src: "/images/img_7848.webp",
+    src: "/images/dummy-gallery-3.webp",
     alt: "Power rack and lifting platform with wall murals",
     caption: "Power rack and lifting platform",
     span: "lg:col-span-4",
@@ -24,7 +24,7 @@ const tiles = [
   },
   {
     slot: "gallery-3",
-    src: "/images/img_7853.webp",
+    src: "/images/dummy-gallery-6.webp",
     alt: "Rubber dumbbell racks in front of the cable machines",
     caption: "Dumbbell racks",
     span: "lg:col-span-3",
@@ -32,7 +32,7 @@ const tiles = [
   },
   {
     slot: "gallery-4",
-    src: "/images/img_7854.webp",
+    src: "/images/dummy-gallery-5.webp",
     alt: "Plate-loaded machine in front of the Train In The Dark wall",
     caption: "Plate-loaded machines",
     span: "lg:col-span-3",
@@ -40,7 +40,7 @@ const tiles = [
   },
   {
     slot: "gallery-5",
-    src: "/images/img_7845.webp",
+    src: "/images/dummy-gallery-2.webp",
     alt: "Bench press station and plate-loaded machines on the main floor",
     caption: "Bench and press stations",
     span: "lg:col-span-4",
@@ -48,7 +48,7 @@ const tiles = [
   },
   {
     slot: "gallery-6",
-    src: "/images/img_7851.webp",
+    src: "/images/dummy-gallery-4.webp",
     alt: "Wide view of the machines and dumbbell area from the entrance",
     caption: "Machines and free weights",
     span: "lg:col-span-5",
