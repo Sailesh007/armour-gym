@@ -38,6 +38,8 @@ jobs:
           src/components/CinematicStory.tsx src/components/HomeSections.tsx
           src/components/ProgramShowcase.tsx src/components/Parallax.tsx
           src/components/Navbar.tsx src/components/Footer.tsx src/components/FooterHologram.tsx src/lib/membership.ts
+          src/components/admin src/app/admin src/app/api/admin/media
+          src/lib/cloudinary-media.ts src/lib/media-auth.ts src/lib/media-slots.ts
       - name: Production build
         run: npm run build
       - name: Repository-wide lint baseline (nonblocking)
