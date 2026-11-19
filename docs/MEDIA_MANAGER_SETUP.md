@@ -33,9 +33,10 @@ The script accepts a password without echoing it to your terminal. Paste only th
 3. Pick an individual section image.
 4. Upload original high-quality JPG, PNG or WebP up to 10 MB.
 5. Select the draft thumbnail and adjust horizontal/vertical focal position.
-6. Choose **Publish this image**. The existing published Cloudinary photo is moved into a versioned history path.
-7. Select a history photo and choose **Restore and publish this version** to roll back.
-8. Use **Use original photo** to revert entirely to the website's built-in photo, without losing the Cloudinary version.
+6. Open **Preview on website** to see the draft inside the actual Hero, Story, Programs or Gallery layout before publishing (About/Contact use a representative section preview).
+7. Choose **Publish this image**. The existing published Cloudinary photo is moved into a versioned history path.
+8. Select a history photo and choose **Restore and publish this version** to roll back.
+9. Use **Use original photo** to revert entirely to the website's built-in photo, without losing the Cloudinary version.
 
 The original logo `/armour-logo.png` is **not in the editable slots**.
 
