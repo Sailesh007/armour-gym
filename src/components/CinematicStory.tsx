@@ -126,7 +126,7 @@ export default function CinematicStory({ images }: { images: SiteImages }) {
                 >
                   <Image
                     src={images[moment.slot].src}
-                    alt={`ARMOUR 24-7 Gym – ${moment.label.toLowerCase()}`}
+                    alt={images[moment.slot].src.startsWith("/images/dummy-") ? `Decorative image for ${moment.label.toLowerCase()}` : `ARMOUR 24-7 Gym – ${moment.label.toLowerCase()}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 54vw"
                     className="object-cover transition-[filter] duration-700 group-hover:brightness-110"
